@@ -26,17 +26,24 @@ $text-color: rgb(34, 34, 34) !default;
 /// @type Color
 $brand-color: rgb(229, 0, 80) !default;
 
-/// Light grey
+/// dark blue
 /// @type Color
-$light-grey: rgb(237, 237, 237) !default;
+$dark-blue: #152A38 !default;
 
-/// Medium grey
+/// reg-blue
 /// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
+$reg-blue: #29435C!default;
 
-/// Dark grey
+///@type Color
+$light-blue: #647789 !default;
+
+/// reg-green
 /// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
+$reg-green: #556E53 !default;
+
+/// reg-tan
+/// @type Color
+$reg-tan: #D1D4C9 !default;
 
 
 
