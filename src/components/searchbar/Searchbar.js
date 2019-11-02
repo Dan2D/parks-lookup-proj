@@ -6,13 +6,13 @@ function Searchbar({dropdown}) {
 
     function handleDropdownSelect(e) {
         setSelect(e.target.dataset.value);
-        setToggleDropdown(!toggleDropdown);
+        document.querySelector(".dropdown--hero").blur();
     }
 
     return (
         <div className="searchbar-container">
             <input type="search" name="hero-searchbar" className="searchbar searchbar--hero"/>
-            <div class="dropdown dropdown--hero" tabIndex="-1" onClick={() => setToggleDropdown(!toggleDropdown)} >
+            <div class="dropdown dropdown--hero" tabIndex="-1" onClick={() => setToggleDropdown(!toggleDropdown)} onBlur={() => setToggleDropdown(!toggleDropdown)}>
                 <span>{select}</span>
                 <button class="dropdown__btn">
                     <img src={require("../../assets/images/arrow-down.png")} alt=""/>
