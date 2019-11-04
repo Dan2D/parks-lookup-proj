@@ -5,6 +5,18 @@
     padding: 5px 10px;
 }
 
+.btn--hero-go {
+    display: block;
+    font-family: 'Staatliches', cursive;
+    font-size: 24px;
+    background: $reg-blue;
+    color: $reg-tan;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
 .btn--park-lnk {
     position: relative;
     font-family: 'Staatliches', cursive;

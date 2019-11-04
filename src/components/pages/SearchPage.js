@@ -1,31 +1,42 @@
 import React from 'react';
 import ParkSummary from "../ParkSummary";
+import { connect } from 'react-redux';
 
-function SearchPage({stateName, parkResults}) {
-//TODO(Setup store, won't render with undefined parkresults prop)
+//CONTAINER COMPONENT
+function SearchPage({stateName, parksResults, appState}) {
+    let parksList = [];
+    Object.keys(parksResults).forEach((key, ind) => {
+        let park = parksResults[key];
+        parksList.push(
+            <ParkSummary 
+                key={park.id} 
+                parkNum={ind} 
+                parkName={park.fullName} 
+                parkDscrpt={park.description} 
+                parkLnk={park.url}
+            />
+        )
+    })
 
-    // const parkList = parkResults.map((park, ind) => {
-    //     return (
-    //         <ParkSummary 
-    //             key={park.id} 
-    //             parkNum={ind} 
-    //             parkName={park.name} 
-    //             parkDscrpt={park.dscrpt} 
-    //             parkLnk={park.lnk}
-    //         />
-    //     )
-    // })
-
-
+    if (appState.loading){
+        return <div>Loading...</div>
+    } 
     return (
         <div>
             <div class="search-results-container">
-                <h1 class="state-title">{`${("washington").toUpperCase()} PARKS`}</h1>
-                {/* {parkList} */}
-                <ParkSummary />
+                <h1 class="state-title">{`${stateName} PARKS`}</h1>
+                {parksList}
             </div>
         </div>
     )
 }
 
-export default SearchPage
+const mapStateToProps = state => {
+    return {
+        appState: state.appState,
+        stateName: state.appState.state,
+        parksResults: state.parksData.parks.byId
+    }
+}
+
+export default connect(mapStateToProps)(SearchPage)

@@ -44,13 +44,14 @@
 .dropdown__menu {
     cursor: default;
     position: relative;
-    display: inline-block;
+    display: block;
     font-family: 'Staatliches', cursive;
     letter-spacing: 5px;
     color: $reg-tan;
     background: $reg-blue;
     width: 150px;
     margin-left: 30px;
+    float: right;
 }
 
 
@@ -90,5 +91,4 @@
         }
     }
     
-
 }

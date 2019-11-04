@@ -1,28 +1,22 @@
 import React from 'react'
 
 function ParkSummary({parkNum, parkName, parkDscrpt, parkLnk}) {
+
     return (
         <div class="expanding-div">
-            <span class="park-num">
-                {/* {parkNum} */}
-                1.
-            </span>
-            <h2 class="park-name">
-                {/* {parkName} */}
-                EBEY'S LANDING NATIONAL HISTORICAL RESERVE
-            </h2>
-            <input type="checkbox" name="btn-expand" id="btn-expand" />
-            <label htmlFor="btn-expand" class="btn-expand-label"></label>
+            <div class="park-title-container">
+                <span class="park-title__num">
+                    {parkNum + 1}
+                </span>
+                <h2 class="park-title__name">
+                    {parkName}
+                </h2>
+            </div>
+            <input type="checkbox" style={{display: "none"}} name={`btn-expand${parkNum + 1}`} id={`btn-expand${parkNum + 1}`} className='btn-expand' />
+            <label htmlFor={`btn-expand${parkNum + 1}`} class="btn-expand-label"></label>
             <div class="expand-content">
                 <p class="park-description">
-                    {/* {parkDscrpt} */}
-                    This stunning landscape at the gateway to Puget Sound, 
-                    with its rich farmland and promising seaport, lured the 
-                    earliest American pioneers north of the Columbia River 
-                    to Ebey’s Landing. Today Ebey’s Landing National Historical 
-                    Reserve preserves the historical, agricultural and cultural 
-                    traditions of both Native and Euro-American – while offering 
-                    spectacular opportunities for recreation.
+                    {parkDscrpt}
                 </p>
                 <a href={parkLnk} class="btn btn--park-lnk">
                     GO TO PARK
