@@ -1,0 +1,66 @@
+.search-results-container {
+    background: #E5E8DF;
+    padding: 20px 10px;
+}
+
+.state-title {
+    text-decoration: underline;
+}
+
+.expanding-div {
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 5px 10px;
+    background: white;
+    width: 650px;
+}
+
+.park-num {
+    display: inline-block;
+}
+
+.park-name {
+    display: inline-block;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+
+.btn-expand-label::after {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-family: "icons";
+    content: "\efc2";
+    font-size: 24px;
+    font-weight: 700;
+    padding: 5px 10px;
+}
+
+#btn-expand {
+display: none;
+    &:checked ~ .btn-expand-label::after {
+        content: "\ef9a";
+    }
+    &:checked ~ .expand-content {
+        display: block;
+    }
+}
+
+.expand-content {
+    display: none;
+}
+
+.park-description {
+    width: 100%;
+}
+
+.park-lnk {
+    float: right;
+}
+
+
+
+

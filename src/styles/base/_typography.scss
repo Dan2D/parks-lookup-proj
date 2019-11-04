@@ -1,6 +1,13 @@
 /**
  * Basic typography style for copy text
  */
+
+@font-face {
+  font-family: "icons";
+  src: url("../assets/fonts/icofont.ttf");
+}
+
+
 body {
   color: $text-color;
   font-family: 'Open Sans', sans-serif;

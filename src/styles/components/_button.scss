@@ -1,3 +1,26 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+.btn {
+    padding: 5px 10px;
+}
+
+.btn--park-lnk {
+    position: relative;
+    font-family: 'Staatliches', cursive;
+    font-size: 18px;
+    background: $reg-blue;
+    color: $reg-tan;
+    float: right;
+    padding-right: 40px;
+    & img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 15px;
+        transform: rotate(-90deg);
+    }
+    &:hover {
+        color: $reg-tan;
+    }
+}
