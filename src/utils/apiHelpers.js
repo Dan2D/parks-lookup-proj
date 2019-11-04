@@ -1,7 +1,7 @@
 export function setIds(data, prefix) {
     let tempIdObj = {};
     data.forEach((item) => {
-        tempIdObj[item.id] = item;
+        tempIdObj[item.parkCode] = item;
     })
     return tempIdObj;
 }

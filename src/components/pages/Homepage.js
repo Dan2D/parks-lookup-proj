@@ -1,17 +1,6 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import {getParks} from "../../actions/parksDataActions";
+import React from 'react';
 
 import Hero from "../Hero";
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//       getParks: (state) => {
-//         dispatch(getParks(state));
-//       },
-//     }
-//   }
-
 
 function Homepage(props) {
     return (

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {setState} from "../../actions/parksDataActions";
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 const mapDispatchToProps = dispatch => {
@@ -13,6 +14,7 @@ const mapDispatchToProps = dispatch => {
 //   TODO(Set explore btn to link and setup react router, then do prevent default on handle search)
 function Searchbar({dropdown, states, setState}) {
     const [select, setSelect] = useState('state');
+    const [selectVal, setSelectVal] = useState('AL');
     const [toggleDropdown, setToggleDropdown] = useState(false);
 
     let statesArr = [];
@@ -24,7 +26,7 @@ function Searchbar({dropdown, states, setState}) {
         )
     })
 
-    function handleSearch() {
+    function handleSearch(e) {
         if (select === "state"){
             let stateVal = document.getElementById("state-select").value;
             const stateFull = (states[stateVal].name).toString();
@@ -33,6 +35,7 @@ function Searchbar({dropdown, states, setState}) {
         else {
             console.log("parks")
         }
+
     }
 
     function handleDropdownSelect(e) {
@@ -40,10 +43,14 @@ function Searchbar({dropdown, states, setState}) {
         document.querySelector(".dropdown--hero").blur();
     }
 
+    function handleStateSelect(e) {
+        setSelectVal(e.target.value);
+    }
+
     return (
         <div className="searchbar-container">
             {select === "state" ? 
-                <select name="state-selection" id="state-select" class="hero-select hero-select--state">
+                <select name="state-selection" id="state-select" class="hero-select hero-select--state" onChange={(e) => handleStateSelect(e)}>
                     {statesArr}
                 </select> :
                 <input type="search" name="hero-searchbar" className="searchbar searchbar--hero"/>
@@ -58,7 +65,7 @@ function Searchbar({dropdown, states, setState}) {
                     </div>
                 }
             </div>
-            <button class="btn btn--hero-go" onClick={() => handleSearch()}>EXPLORE</button>
+            <Link to={`/state=${selectVal}`} class="btn btn--hero-go" onClick={(e) => handleSearch(e)}>EXPLORE</Link>
         </div>
     )
 };

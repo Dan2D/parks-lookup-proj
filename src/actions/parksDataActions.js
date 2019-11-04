@@ -6,12 +6,11 @@ import axios from 'axios';
 const PARKS_API_KEY = process.env.PARKS_API_KEY;
 
 export const setState = (state, stateFull) => dispatch => {
-    console.log(stateFull, state)
     dispatch({type: types.SET_STATE, payload: stateFull, stateAbbrev: state});
-    dispatch(getParks(state));
+    dispatch(getStateParks(state));
 }
 
-export const getParks = state => dispatch => {
+export const getStateParks = state => dispatch => {
     console.log(state);
     dispatch({type: types.GET_PARKS});
    return axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
@@ -25,5 +24,9 @@ export const getParks = state => dispatch => {
         })
     })
     .catch(err => dispatch({type: types.GET_PARKS_FAIL, payload: err.message}))
+}
+
+export const getPark = parkId => dispatch => {
+    
 }
 

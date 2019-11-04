@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-function ParkSummary({parkNum, parkName, parkDscrpt, parkLnk}) {
+function ParkSummary({parkNum, parkName, parkDscrpt, parkCode}) {
 
     return (
         <div class="expanding-div">
@@ -18,10 +19,10 @@ function ParkSummary({parkNum, parkName, parkDscrpt, parkLnk}) {
                 <p class="park-description">
                     {parkDscrpt}
                 </p>
-                <a href={parkLnk} class="btn btn--park-lnk">
+                <Link to={`/parks=${parkCode}`} class="btn btn--park-lnk">
                     GO TO PARK
                     <img class="dropdown__btn" src={require("../assets/images/arrow-down.png")} alt=""/>    
-                </a>
+                </Link>
             </div>
         </div>
     )

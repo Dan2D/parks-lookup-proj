@@ -13,7 +13,7 @@ function SearchPage({stateName, parksResults, appState}) {
                 parkNum={ind} 
                 parkName={park.fullName} 
                 parkDscrpt={park.description} 
-                parkLnk={park.url}
+                parkLnk={park.parkCode}
             />
         )
     })
