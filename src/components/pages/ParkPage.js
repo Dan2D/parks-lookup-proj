@@ -8,6 +8,10 @@ import ParkNews from "../ParkNews";
 
 function ParkPage({parks, parkCode, alerts}) {
     const [campgrounds, setCampgrounds] = useState(false);
+    const PARK_STATES = parks[parkCode].states;
+    const PARK_NAME = parks[parkCode].fullName;
+    const PARK_DSCRPT = parks[parkCode].description;
+    const PARK_WEATHER_TXT = parks[parkCode].weatherInfo;
 
     return (
         <div className="park-page-container">
@@ -15,24 +19,22 @@ function ParkPage({parks, parkCode, alerts}) {
             <div className="park-container">
                 <div className="park-content-container">
                     <h1 className="park__name">
-                        {parks[parkCode].fullName}
+                        {PARK_NAME}
                     </h1>
                     <span className="park__states">
-                        {`States: ${parks[parkCode].states}`}
+                        {`States: ${PARK_STATES}`}
                     </span>
                     <p className="park__dscrpt">
-                        {parks[parkCode].description}
+                        {PARK_DSCRPT}
                     </p>
-                    {parks[parkCode].weatherInfo && 
-                        <>
-                            <h2 className="park__section-title park__section-title--weather">
-                                WEATHER
-                            </h2>
-                            <p className="park__section-txt">
-                                {parks[parkCode].weatherInfo}
-                            </p>
-                        </>
-                    }
+                    <section className="park__section park__section--weather">
+                        <h2 className="park__section-title">
+                            WEATHER
+                        </h2>
+                        <p className="park__section-txt">
+                            {PARK_WEATHER_TXT}
+                        </p>
+                    </section>
                     <ParkAlerts alerts={alerts} />
                     <ParkEvents parkCode={parkCode}/>
                     <ParkNews parkCode={parkCode} />

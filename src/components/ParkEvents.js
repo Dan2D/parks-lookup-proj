@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getEvents } from "../actions/parksDataActions";
+import Parser from 'react-html-parser';
 import { formatDate } from "../utils/genHelpers";
 
 import LoaderDots from "./Loaders/LoaderDots";
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 function ParkEvents({parkCode, eventPark, events, getEvents, isLoading}) {
+    
 //TODO(Make into own component, getting a little messy)
     let eventsArr = [];
     if (Object.keys(events).length < 1){
@@ -27,42 +29,54 @@ function ParkEvents({parkCode, eventPark, events, getEvents, isLoading}) {
     }
     else {
         Object.keys(events).forEach(key => {
+            const EVENT_TITLE = events[key].title;
+            const EVENT_CATEGORY = events[key].category;
+            const EVENT_DSCRPT = events[key].description;
+            const EVENT_DATE_START = events[key].datestart;
+            const EVENT_DATE_END = events[key].dateend;
+            const EVENT_TIME_START = events[key].times[0].timestart;
+            const EVENT_TIME_END = events[key].times[0].timeend;
+            const EVENT_FREE = events[key].isfree;
+            const EVENT_ADMISSION = events[key].feeInfo;
+            const EVENT_CONTACT_NAME = events[key].contactname;
+            const EVENT_CONTACT_PHONE = events[key].contacttelephonenumber;
+            const EVENT_CONTACT_EMAIL = events[key].contactemailaddress;
             eventsArr.push(
                 <div key={key} class="event__content card">
                     <h5 class="event__title">
-                        {events[key].title}
+                        {EVENT_TITLE}
                     </h5>
-                    <span class={`event__category event__category--${(events[key].category).replace(" ", "_")}`}>
-                        {events[key].category && `Category: ${events[key].category}`}
+                    <span class={`event__category event__category--${(EVENT_CATEGORY).replace(" ", "_")}`}>
+                        {EVENT_CATEGORY && `Category: ${EVENT_CATEGORY}`}
                     </span>
                     <p class="event__txt">
-                        {(events[key].description).slice(3,events[key].description.length-4)}
-                    </p>
+                        {Parser(EVENT_DSCRPT)}
+                    </p>    
                     <p class="event__dates">
                         <strong>Date</strong>: 
-                        {` ${formatDate(events[key].datestart)} - ${formatDate(events[key].dateend)}`}
+                        {` ${formatDate(EVENT_DATE_START)} - ${formatDate(EVENT_DATE_END)}`}
                     </p>
                     <p class="event__times">
                         <strong>Time</strong>: 
-                        {` ${events[key].times[0].timestart} - ${events[key].times[0].timeend}`}
+                        {` ${EVENT_TIME_START} - ${EVENT_TIME_END}`}
                     </p>
                     <p class="event__admission">
                         <strong>Admission</strong>: 
-                        {` ${events[key].title.includes("Closed") ? "N/A" : events[key].isfree ? "Free" : events[key].feeinfo}`}
+                        {` ${EVENT_TITLE.includes("Closed") ? "N/A" : EVENT_FREE ? "Free" : EVENT_ADMISSION}`}
                     </p>
                     <h5 class="event__contact-title">
                         Contact Info
                     </h5>
                     <p class="event__contact-center">
-                        {events[key].contactname}
+                        {EVENT_CONTACT_NAME}
                     </p>
                     <p class="event__contact-phone">
                         <strong>phone</strong>:
-                        {` ${events[key].contacttelephonenumber}`}
+                        {` ${EVENT_CONTACT_PHONE}`}
                     </p>
                     <p class="event__contact-email">
                     <strong>email</strong>:
-                    {` ${events[key].contactemailaddress}`}
+                    {` ${EVENT_CONTACT_EMAIL}`}
                     </p>
                 </div>
             )

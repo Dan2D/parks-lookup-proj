@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import Parser from 'react-html-parser';
 import { getNews } from "../actions/parksDataActions";
 import { formatDate } from "../utils/genHelpers";
 
@@ -26,19 +27,23 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
     }
     else {
         Object.keys(news).forEach(key => {
+            const NEWS_TITLE = news[key].title;
+            const NEWS_DATE = news[key].releasedate;
+            const NEWS_ABSTRACT = news[key].abstract;
+            const NEWS_URL = news[key].url;
             newsArr.push(
                 <div class="news__content card">
                     <h2 class="news__title">
-                        {news[key].title}
+                        {NEWS_TITLE}
                     </h2>
                     <span class="news__date">
-                        {(formatDate(news[key].releasedate ))}
+                        {formatDate(NEWS_DATE)}
                     </span>
                     <p class="news_txt">
                         <strong>Abstract</strong>:
-                        {` ${news[key].abstract}`}
+                        {Parser(NEWS_ABSTRACT)}
                     </p>
-                    <a href={news[key].url} class="news__lnk">More Info</a>
+                    <a href={NEWS_URL} class="news__lnk">More Info</a>
                 </div>
             )
         });
@@ -52,15 +57,21 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
 
     return (
         <div className='news-container'>
-                <h2 class="park__section-title park__section-title--news">
-                    NEWS
-                </h2>
-                <input type="checkbox" style={{display: "none"}} name={`btn-expand--news`} id={`btn-expand--news`} className='btn-expand btn-expand--news' />
-                <label 
-                    htmlFor={`btn-expand--news`} 
-                    class="btn-expand-label btn-expand-label--news"
-                    onClick={() => handleNewsExpand(parkCode)}
-                    />
+            <h2 class="park__section-title park__section-title--news">
+                NEWS
+            </h2>
+            <input 
+                type="checkbox" 
+                style={{display: "none"}} 
+                name={`btn-expand--news`} 
+                d={`btn-expand--news`} 
+                className='btn-expand btn-expand--news' 
+            />
+            <label 
+                htmlFor={`btn-expand--news`} 
+                class="btn-expand-label btn-expand-label--news"
+                onClick={() => handleNewsExpand(parkCode)}
+            />
             {newsLoaded && <LoaderDots expand={true} />}
             {!newsLoaded && newsArr}
         </div>

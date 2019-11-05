@@ -25,12 +25,6 @@ function ParkNav({parkCode, getParkData}) {
             <Link to={`/parks=${parkCode}/visitorscenters`} className='park-nav__lnk park-nav__lnk--vcenters' onClick={() => handleParkNavClick('visitorcenters')}>
                 VISITOR'S CENTERS
             </Link>
-            {/* <Link to={`/parks=${parkCode}/events`} className='park-nav__lnk park-nav__lnk--events' onClick={() => handleParkNavClick('events')}>
-                EVENTS
-            </Link>
-            <Link to={`/parks=${parkCode}/news`} className='park-nav__lnk park-nav__lnk--news' onClick={() => handleParkNavClick('news')}>
-                NEWS
-            </Link> */}
         </nav>
     )
 }

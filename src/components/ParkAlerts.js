@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Parser from 'react-html-parser';
 import Loader from "./Loaders/LoaderDots";
 
 function ParkAlerts({alerts, isLoading}) {
@@ -13,18 +14,24 @@ function ParkAlerts({alerts, isLoading}) {
     }
     else {
         Object.keys(alerts).forEach(key => {
+            const ALERT_TITLE = alerts[key].title;
+            const ALERT_CATEGORY = alerts[key].category;
+            const ALERT_DSCRPT = alerts[key].description;
+            const ALERT_URL = alerts[key].url;
             alertsArr.push(
                 <div key={key} class="alert__content">
                     <h5 class="alert__title">
-                        {alerts[key].title}
+                        {ALERT_TITLE}
                     </h5>
-                    <span class={`alert__category alert__category--${(alerts[key].category).replace(" ", "_")}`}>
-                        {alerts[key].category && `Category: ${alerts[key].category}`}
+                    <span class={`alert__category alert__category--${(ALERT_CATEGORY).replace(" ", "_")}`}>
+                        {ALERT_CATEGORY && `Category: ${ALERT_CATEGORY}`}
                     </span>
                     <p class="alert__txt">
-                        {alerts[key].description}
+                        {Parser(ALERT_DSCRPT)}
                     </p>
-                    <a href={alerts[key].url} class="alert__lnk" target="_blank">More Info</a>
+                    <a href={ALERT_URL} class="alert__lnk" target="_blank" rel="noopener noreferrer">
+                        More Info
+                    </a>
                 </div>
             )
         });

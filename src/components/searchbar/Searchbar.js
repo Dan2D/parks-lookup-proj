@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 
-//   TODO(Set explore btn to link and setup react router, then do prevent default on handle search)
 function Searchbar({dropdown, states, setState}) {
     const [select, setSelect] = useState('state');
     const [selectVal, setSelectVal] = useState('AL');
@@ -35,7 +34,6 @@ function Searchbar({dropdown, states, setState}) {
         else {
             console.log("parks")
         }
-
     }
 
     function handleDropdownSelect(e) {
