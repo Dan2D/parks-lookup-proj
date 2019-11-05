@@ -1,7 +1,8 @@
-export function setIds(data, prefix) {
+export function setIds(data, type) {
+    let id = type === "park" ? "parkCode" : "id";
     let tempIdObj = {};
     data.forEach((item) => {
-        tempIdObj[item.parkCode] = item;
+        tempIdObj[item[id]] = item;
     })
     return tempIdObj;
 }

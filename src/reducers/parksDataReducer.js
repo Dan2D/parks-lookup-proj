@@ -6,9 +6,12 @@ let initialState = {};
 const parksDataReducer = (state = initialState, action) => {
     switch(action.type){
        case types.GET_PARKS_SUCCESS:
+       case types.GET_ALERTS_SUCCESS: 
+       case types.GET_EVENTS_SUCCESS:
+           console.log(action.name, action.payload)
            return {
                 ...state,
-                parks: {
+                [action.name]: {
                     byId: action.payload,
                     allIds: action.allIds
                 }

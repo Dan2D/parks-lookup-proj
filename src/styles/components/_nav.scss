@@ -43,3 +43,46 @@
 .nav-lnk:hover {
     color: $reg-blue;
 }
+
+// ---------PARK NAV----------//
+.park-nav-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.park-nav__lnk {
+    position: relative;
+    color: black;
+}
+
+.park-nav__lnk--camps::before,
+.park-nav__lnk--vcenters::before,
+.park-nav__lnk--alerts::before,
+.park-nav__lnk--events::before,
+.park-nav__lnk--news::before {
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    font-family: "icons";
+    font-size: 18px;
+}
+
+
+    .park-nav__lnk--camps::before {
+        top: -2px;
+        left: -25px;
+        font-size: 24px;
+        content: "\ee62";
+    }
+    .park-nav__lnk--vcenters::before {
+        content: "\efca";
+    }
+    .park-nav__lnk--alerts::before {
+        content: "\ef1b";
+    }
+    .park-nav__lnk--events::before {
+        content: "\ef4f";
+    }
+    .park-nav__lnk--news::before {
+        content: "\efa7";
+    }

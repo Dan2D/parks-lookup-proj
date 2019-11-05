@@ -1,7 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setPark } from "../actions/parksDataActions";
 
-function ParkSummary({parkNum, parkName, parkDscrpt, parkCode}) {
+const mapDispatchToProps = dispatch => {
+    return {
+        setPark: (parkCode) => {
+            return dispatch(setPark(parkCode));
+        }
+    }
+}
+
+function ParkSummary({parkNum, parkName, parkDscrpt, parkCode, setPark}) {
+
+    function handleParkClick() {
+        setPark(parkCode);
+    }
 
     return (
         <div class="expanding-div">
@@ -19,7 +33,7 @@ function ParkSummary({parkNum, parkName, parkDscrpt, parkCode}) {
                 <p class="park-description">
                     {parkDscrpt}
                 </p>
-                <Link to={`/parks=${parkCode}`} class="btn btn--park-lnk">
+                <Link to={`/parks=${parkCode}`} class="btn btn--park-lnk" onClick={() => handleParkClick()}>
                     GO TO PARK
                     <img class="dropdown__btn" src={require("../assets/images/arrow-down.png")} alt=""/>    
                 </Link>
@@ -28,4 +42,4 @@ function ParkSummary({parkNum, parkName, parkDscrpt, parkCode}) {
     )
 }
 
-export default ParkSummary
+export default connect(null, mapDispatchToProps)(ParkSummary)

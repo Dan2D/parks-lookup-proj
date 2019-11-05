@@ -10,6 +10,11 @@ const appStateReducer = (state = initialState, action) => {
                ...state,
                    state: action.payload
            }
+        case types.SET_PARK:
+            return {
+                ...state,
+                park: action.payload
+            }
        case types.GET_PARKS:
            return {
                ...state,

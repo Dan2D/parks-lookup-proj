@@ -1,0 +1,102 @@
+.park-page-container {
+    background: $light-tan;
+}
+
+.park-content-container {
+    padding: 20px 10px;
+}
+
+.park__section-title::after,
+.alert__category::after {
+    position: absolute;
+    top: 2px;
+    right: -25px;
+    font-family: "icons";
+    font-size: 18px;
+}
+
+.park__section-title::after {
+    top: -4px;
+    right: -45px;
+    font-size: 32px;
+}
+
+.park {
+    &__section-title {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+    }
+    &__section-title--alerts::after {
+        content: "\ef1b";
+    }
+    &__section-title--weather::after {
+        content: "\ee83";
+    }
+    &__section-txt {
+        margin-top: 0;
+    }
+    &__name {
+        display: block;
+        text-decoration: underline;
+        margin: 0;
+    }
+    &__dscrpt {
+        margin-top: 0;
+    }
+}
+
+.alert {
+    &__content {
+        margin: 10px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+    }
+    &__title {
+        margin: 0;
+    }
+    &__category {
+        position: relative;
+    }
+    &__category--Information::after {
+        content: "\ef4f";
+    }
+    &__category--Caution::after {
+        content: "\ef1b";
+        color: rgb(197, 197, 63);
+    }
+    &__category--Park_Closure::after {
+        content: "\ec4f";
+        color: rgb(172, 41, 41);
+    }
+}
+
+.events-container {
+
+}
+
+.events-title-container {
+    display: inline-block;
+    padding-right: 50px;
+    position: relative;
+}
+
+.event {
+    &__content {
+        display: none;
+    }
+}
+
+.btn-expand-label--events::after {
+    position: relative;
+    top: -1px;
+    right: 0;
+}
+
+.btn-expand--events{
+    &:checked ~ .event__content {
+        display: block;
+    }
+}
+
