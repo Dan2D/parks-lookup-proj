@@ -1,5 +1,8 @@
 .park-page-container {
+    min-height: 100vh;
+    padding: 0 30px;
     background: $light-tan;
+    
 }
 
 .park-content-container {
@@ -47,6 +50,10 @@
 }
 
 .alert {
+    &__none {
+        margin-top: 0;
+        font-size: 18px;
+    }
     &__content {
         margin: 10px 0;
         padding: 10px;
@@ -85,18 +92,45 @@
 .event {
     &__content {
         display: none;
+        font-size: 18px;
+        & p {
+            margin-top: 0;
+        }
+    }
+    &__title {
+        font-size: 20px;
+    }
+    &__category {
+        position: relative;
+        top: -5px;
+        font-size: 14px;
+    }
+    &__contact-title {
+        font-size: 18px;
+        text-decoration: underline;
+    }
+    &__contact-center {
+        margin-top: 0;
     }
 }
 
-.btn-expand-label--events::after {
+.news {
+    &__content {
+        display: none;
+    }
+}
+
+.btn-expand-label--events::after,
+.btn-expand-label--news::after {
+    cursor: pointer;
     position: relative;
     top: -1px;
     right: 0;
 }
 
-.btn-expand--events{
-    &:checked ~ .event__content {
-        display: block;
-    }
+.btn-expand--events:checked ~ .event__content,
+.btn-expand--news:checked ~ .news__content {
+    display: block;
 }
+
 

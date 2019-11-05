@@ -74,8 +74,28 @@ export const getEvents = parkCode => dispatch => {
             type: types.GET_EVENTS_SUCCESS,
             payload: idObj,
             allIds,
-            name: 'events'
+            name: 'events',
+            parkCode
         })
     })
     .catch(err => dispatch({type: types.GET_EVENTS_FAIL, payload: err.message}))
+}
+
+export const getNews = parkCode => dispatch => {
+    console.log("NEWS", parkCode)
+    dispatch({type: types.GET_NEWS});
+    axios.get(`https://developer.nps.gov/api/v1/newsreleases?parkCode=${parkCode}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
+    .then(res => {
+        let idObj = setIds(res.data.data, "id");
+        let allIds = getAllIds(idObj);
+        console.log(idObj, allIds)
+        dispatch({
+            type: types.GET_NEWS_SUCCESS,
+            payload: idObj,
+            allIds,
+            name: 'news',
+            parkCode
+        })
+    })
+    .catch(err => dispatch({type: types.GET_NEWS_FAIL, payload: err.message}))
 }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ParkNav from "../ParkNav";
 import ParkAlerts from "../ParkAlerts";
 import ParkEvents from "../ParkEvents";
+import ParkNews from "../ParkNews";
 
 function ParkPage({parks, parkCode, alerts}) {
     const [campgrounds, setCampgrounds] = useState(false);
@@ -33,6 +34,7 @@ function ParkPage({parks, parkCode, alerts}) {
                 }
                 <ParkAlerts alerts={alerts} />
                 <ParkEvents parkCode={parkCode}/>
+                <ParkNews parkCode={parkCode} />
             </div>
         </div>
     )

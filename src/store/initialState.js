@@ -172,19 +172,23 @@ export const initialState = {
        },
        campgrounds: {
         byId: {},
-        allIds: []
+        allIds: [],
+        parkCode: ""
        },
        events: {
         byId: {},
-        allIds: []
+        allIds: [],
+        parkCode: ""
        },
        news: {
         byId: {},
-        allIds: []
+        allIds: [],
+        parkCode: ""
        },
        visitorCenters: {
         byId: {},
-        allIds: []
+        allIds: [],
+        parkCode: ""
        },
    },
 //    mapData: {}

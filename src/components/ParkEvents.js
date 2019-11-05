@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getEvents } from "../actions/parksDataActions";
+import { formatDate } from "../utils/genHelpers";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -10,35 +11,75 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-function ParkEvents({parkCode, events, getEvents}) {
-// TODO(ADD Dates, Times, Price, Contact Info)
+function ParkEvents({parkCode, eventPark, events, getEvents}) {
+//TODO(Make into own component, getting a little messy)
     let eventsArr = [];
-    Object.keys(events).forEach(key => {
+    if (Object.keys(events).length < 1){
         eventsArr.push(
-            <div key={key} class="event__content">
-                <h5 class="event__title">
-                    {events[key].title}
-                </h5>
-                <span class={`event__category event__category--${(events[key].category).replace(" ", "_")}`}>
-                    {events[key].category && `Category: ${events[key].category}`}
-                </span>
-                <p class="event__txt">
-                    {(events[key].description).slice(3,events[key].description.length-4)}
+            <div class="event__content">
+                <p class="events__none">
+                    There are currently no events listed for this park.
                 </p>
-                <a href={events[key].url} class="event__lnk" target="_blank">More Info</a>
             </div>
         )
-    });
-
+    }
+    else {
+        Object.keys(events).forEach(key => {
+            eventsArr.push(
+                <div key={key} class="event__content card">
+                    <h5 class="event__title">
+                        {events[key].title}
+                    </h5>
+                    <span class={`event__category event__category--${(events[key].category).replace(" ", "_")}`}>
+                        {events[key].category && `Category: ${events[key].category}`}
+                    </span>
+                    <p class="event__txt">
+                        {(events[key].description).slice(3,events[key].description.length-4)}
+                    </p>
+                    <p class="event__dates">
+                        <strong>Date</strong>: 
+                        {` ${formatDate(events[key].datestart)} - ${formatDate(events[key].dateend)}`}
+                    </p>
+                    <p class="event__times">
+                        <strong>Time</strong>: 
+                        {` ${events[key].times[0].timestart} - ${events[key].times[0].timeend}`}
+                    </p>
+                    <p class="event__admission">
+                        <strong>Admission</strong>: 
+                        {` ${events[key].title.includes("Closed") ? "N/A" : events[key].isfree ? "Free" : events[key].feeinfo}`}
+                    </p>
+                    <h5 class="event__contact-title">
+                        Contact Info
+                    </h5>
+                    <p class="event__contact-center">
+                        {events[key].contactname}
+                    </p>
+                    <p class="event__contact-phone">
+                        <strong>phone</strong>:
+                        {` ${events[key].contacttelephonenumber}`}
+                    </p>
+                    <p class="event__contact-email">
+                    <strong>email</strong>:
+                    {` ${events[key].contactemailaddress}`}
+                    </p>
+                </div>
+            )
+        });
+    
+    }
+    
     function handleEventExpand() {
+        if (parkCode === eventPark){
+            return
+        }
         getEvents(parkCode);
     }
 
     return (
         <div className='events-container'>
-                <h3 class="park__section-title park__section-title--events">
+                <h2 class="park__section-title park__section-title--events">
                     EVENTS
-                </h3>
+                </h2>
                 <input type="checkbox" style={{display: "none"}} name={`btn-expand--events`} id={`btn-expand--events`} className='btn-expand btn-expand--events' />
                 <label 
                     htmlFor={`btn-expand--events`} 
@@ -52,7 +93,8 @@ function ParkEvents({parkCode, events, getEvents}) {
 
 const mapStateToProps = state => {
     return {
-        events: state.parksData.events.byId
+        events: state.parksData.events.byId,
+        eventPark: state.parksData.events.parkCode
     }
 }
 
