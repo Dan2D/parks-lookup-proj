@@ -33,3 +33,64 @@ a {
     text-decoration: none;
   }
 }
+
+.loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 50%;
+  text-align: center;
+  transform: translateY(-50%);
+  z-index: 5;
+  &.sub {
+    position: relative;
+    transform: none;
+    text-align: left;
+    top: 0;
+  }
+  &.fade {
+    opacity: 0;
+    transition: opacity 700ms ease;
+  }
+  &.inactive {
+    display: none !important;
+  }
+  &--dots {
+    height: auto;
+    top: 5px;
+    right: auto;
+    transform: none;
+    &.fade {
+      transition: opacity 300ms ease;
+    }
+  }
+  &--expand {
+    display: none;
+  }
+  &__spinner {
+    height: 100%;
+    animation: ani-loader 2000ms linear infinite;
+  }
+}
+
+@keyframes ani-loader {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ani-loader-dots {
+  0% {
+      opacity:1;
+  }
+  60% {
+      opacity:0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

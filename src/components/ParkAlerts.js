@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Loader from "./Loaders/LoaderDots";
 
-function ParkAlerts({alerts}) {
+function ParkAlerts({alerts, isLoading}) {
     let alertsArr = [];
     if (Object.keys(alerts).length < 1){
        alertsArr.push(
-            <p class="alert__none">
+            <p key="no-alert" class="alert__none">
                 There are currently no alerts for this park.
             </p>
         )
@@ -35,9 +37,16 @@ function ParkAlerts({alerts}) {
             <h2 class="park__section-title park__section-title--alerts">
                 ALERTS
             </h2>
-                {alertsArr}
+            <Loader isLoading={isLoading} />
+            {!isLoading && alertsArr}
         </div>
     )
 }
 
-export default ParkAlerts
+const mapStateToProps = state => {
+    return {
+        isLoading: state.parksData.alerts.loading
+    }
+}
+
+export default connect(mapStateToProps, null)(ParkAlerts)

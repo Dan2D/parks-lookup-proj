@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getEvents } from "../actions/parksDataActions";
 import { formatDate } from "../utils/genHelpers";
 
+import LoaderDots from "./Loaders/LoaderDots";
+
 const mapDispatchToProps = dispatch => {
     return {
         getEvents: (parkCode) => {
@@ -11,12 +13,12 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-function ParkEvents({parkCode, eventPark, events, getEvents}) {
+function ParkEvents({parkCode, eventPark, events, getEvents, isLoading}) {
 //TODO(Make into own component, getting a little messy)
     let eventsArr = [];
     if (Object.keys(events).length < 1){
         eventsArr.push(
-            <div class="event__content">
+            <div key="no-event" class="event__content">
                 <p class="events__none">
                     There are currently no events listed for this park.
                 </p>
@@ -77,22 +79,24 @@ function ParkEvents({parkCode, eventPark, events, getEvents}) {
 
     return (
         <div className='events-container'>
-                <h2 class="park__section-title park__section-title--events">
-                    EVENTS
-                </h2>
-                <input type="checkbox" style={{display: "none"}} name={`btn-expand--events`} id={`btn-expand--events`} className='btn-expand btn-expand--events' />
-                <label 
-                    htmlFor={`btn-expand--events`} 
-                    class="btn-expand-label btn-expand-label--events"
-                    onClick={() => handleEventExpand()}
-                    />
-            {eventsArr}
+            <h2 class="park__section-title park__section-title--events">
+                EVENTS
+            </h2>
+            <input type="checkbox" style={{display: "none"}} name={`btn-expand--events`} id={`btn-expand--events`} className='btn-expand btn-expand--events' />
+            <label 
+                htmlFor={`btn-expand--events`} 
+                class="btn-expand-label btn-expand-label--events"
+                onClick={() => handleEventExpand()}
+                />
+            {isLoading && <LoaderDots expand={true} />}
+            {!isLoading && eventsArr}
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
+        isLoading: state.parksData.events.loading,
         events: state.parksData.events.byId,
         eventPark: state.parksData.events.parkCode
     }

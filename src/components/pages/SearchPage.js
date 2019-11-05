@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ParkSummary from "../ParkSummary";
 import { connect } from 'react-redux';
 
+import Loader from "../Loaders/Loader";
+
 //CONTAINER COMPONENT
-function SearchPage({stateName, parksResults, appState}) {
+function SearchPage({stateName, parksResults, isLoading}) {
+    const [loader, setLoader] = useState(false);
+    useEffect(() => {
+        if (isLoading){
+            setLoader(true);
+        }
+    }, [isLoading])
+
     let parksList = [];
     Object.keys(parksResults).forEach((key, ind) => {
         let park = parksResults[key];
@@ -18,22 +27,22 @@ function SearchPage({stateName, parksResults, appState}) {
         )
     })
 
-    if (appState.loading){
-        return <div>Loading...</div>
-    } 
     return (
-        <div>
             <div class="search-results-container">
-                <h1 class="state-title">{`${stateName} PARKS`}</h1>
-                {parksList}
+                {loader && <Loader isLoading={isLoading} />}
+                {!isLoading && 
+                    <>
+                    <h1 class="state-title">{`${stateName} PARKS`}</h1>
+                    {parksList}
+                    </>
+                }
             </div>
-        </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        appState: state.appState,
+        isLoading: state.parksData.parks.loading,
         stateName: state.appState.state,
         parksResults: state.parksData.parks.byId
     }

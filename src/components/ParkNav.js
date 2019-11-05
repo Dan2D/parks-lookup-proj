@@ -18,7 +18,7 @@ function ParkNav({parkCode, getParkData}) {
     }
 
     return (
-        <nav class="park-nav-container">
+        <nav className="park-nav-container">
             <Link to={`/parks=${parkCode}/campgrounds`} className='park-nav__lnk park-nav__lnk--camps' onClick={() => handleParkNavClick('campgrounds')}>
                 CAMPGROUNDS
             </Link>

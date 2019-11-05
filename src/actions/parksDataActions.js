@@ -11,7 +11,7 @@ export const setState = (state, stateFull) => dispatch => {
 }
 
 export const getStateParks = state => dispatch => {
-    dispatch({type: types.GET_PARKS});
+    dispatch({type: types.GET_PARKS, name: 'parks'});
    return axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
     .then(res => {
         let idObj = setIds(res.data.data, "park");
@@ -47,7 +47,7 @@ export const setPark = parkId => dispatch => {
 }
 
 export const getAlerts = parkCode => dispatch => {
-    dispatch({type: types.GET_ALERTS});
+    dispatch({type: types.GET_ALERTS, name: 'alerts'});
     axios.get(`https://developer.nps.gov/api/v1/alerts?parkCode=${parkCode}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
     .then(res => {
         let idObj = setIds(res.data.data, "id");
@@ -64,7 +64,7 @@ export const getAlerts = parkCode => dispatch => {
 
 export const getEvents = parkCode => dispatch => {
     console.log("EVENTS", parkCode)
-    dispatch({type: types.GET_EVENTS});
+    dispatch({type: types.GET_EVENTS, name: 'events'});
     axios.get(`https://developer.nps.gov/api/v1/events?parkCode=${parkCode}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
     .then(res => {
         let idObj = setIds(res.data.data, "id");
@@ -83,7 +83,7 @@ export const getEvents = parkCode => dispatch => {
 
 export const getNews = parkCode => dispatch => {
     console.log("NEWS", parkCode)
-    dispatch({type: types.GET_NEWS});
+    dispatch({type: types.GET_NEWS, name: 'news'});
     axios.get(`https://developer.nps.gov/api/v1/newsreleases?parkCode=${parkCode}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
     .then(res => {
         let idObj = setIds(res.data.data, "id");

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getNews } from "../actions/parksDataActions";
 import { formatDate } from "../utils/genHelpers";
 
+import LoaderDots from "./Loaders/LoaderDots";
+
 const mapDispatchToProps = dispatch => {
     return {
         getNews: (parkCode) => {
@@ -11,11 +13,11 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-function ParkNews({parkCode, newsPark, getNews, news}) {
+function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
     let newsArr=[];
     if (Object.keys(news).length < 1){
         newsArr.push(
-            <div class="news__content">
+            <div key="no-news" class="news__content">
                 <p class="news__none">
                     There is currently no news on this park.
                 </p>
@@ -30,7 +32,7 @@ function ParkNews({parkCode, newsPark, getNews, news}) {
                         {news[key].title}
                     </h2>
                     <span class="news__date">
-                        {(formatDate(news[key].releasedate))}
+                        {(formatDate(news[key].releasedate ))}
                     </span>
                     <p class="news_txt">
                         <strong>Abstract</strong>:
@@ -59,13 +61,15 @@ function ParkNews({parkCode, newsPark, getNews, news}) {
                     class="btn-expand-label btn-expand-label--news"
                     onClick={() => handleNewsExpand(parkCode)}
                     />
-            {newsArr}
+            {newsLoaded && <LoaderDots expand={true} />}
+            {!newsLoaded && newsArr}
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
+        newsLoaded: state.parksData.news.loading,
         news: state.parksData.news.byId,
         newsPark: state.parksData.news.parkCode
     }

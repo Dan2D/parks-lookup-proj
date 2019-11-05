@@ -164,31 +164,37 @@ export const initialState = {
        },
        parks: {
            byId: {},
-           allIds: []
+           allIds: [],
+           loading: false
        },
        alerts: {
         byId: {},
-        allIds: []
+        allIds: [],
+        loading: false
        },
        campgrounds: {
         byId: {},
         allIds: [],
-        parkCode: ""
+        parkCode: "",
+        loading: false
        },
        events: {
         byId: {},
         allIds: [],
-        parkCode: ""
+        parkCode: "",
+        loading: false
        },
        news: {
         byId: {},
         allIds: [],
-        parkCode: ""
+        parkCode: "",
+        loading: false
        },
        visitorCenters: {
         byId: {},
         allIds: [],
-        parkCode: ""
+        parkCode: "",
+        loading: false
        },
    },
 //    mapData: {}
