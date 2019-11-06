@@ -9,7 +9,7 @@ function Nav() {
                     WILDERNESS<br/>WATCH
                 </h1>
             </div>
-            <div class="nav-lnks-container">
+            <div className="nav-lnks-container">
                 <a href="#" className="nav-lnk">PARKS</a>
                 <a href="#" className="nav-lnk">ABOUT</a>
                 <a href="#" className="nav-lnk">CONTACT</a>

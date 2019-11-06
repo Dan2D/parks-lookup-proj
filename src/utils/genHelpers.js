@@ -9,3 +9,7 @@ export function formatDate(date) {
     date = date.join("/");
     return date;
 }
+
+export function checkIfEmpty(obj) {
+    return Object.keys(obj).length < 1 ? true : false;
+}

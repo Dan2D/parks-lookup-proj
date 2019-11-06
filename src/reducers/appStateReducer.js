@@ -13,24 +13,14 @@ const appStateReducer = (state = initialState, action) => {
         case types.SET_PARK:
             return {
                 ...state,
-                park: action.payload
+                park: action.payload,
+                content: "general"
             }
-        case types.GET_PARKS:
-        case types.GET_ALERTS:
-        case types.GET_EVENTS:
-        case types.GET_NEWS:
-           return {
-               ...state,
-                   loading: true
-           }
-        case types.GET_PARKS_SUCCESS:
-        case types.GET_ALERTS_SUCCESS:
-        case types.GET_EVENTS_SUCCESS:
-        case types.GET_NEWS_SUCCESS:
-            return {
-                ...state,
-                    loading: false
-            }
+        case types.GET_CAMPGROUNDS:
+        return {
+            ...state,
+            content: "camps"
+        }
         case types.GET_PARKS_FAIL:
         case types.GET_ALERTS_FAIL:
         case types.GET_EVENTS_FAIL:

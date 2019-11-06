@@ -59,7 +59,8 @@
 
 .alerts-container,
 .events-container,
-.news-container {
+.news-container,
+.camp-full-container {
     position: relative;
     min-height: 70px;
 }
@@ -133,6 +134,21 @@
     }
     &__none {
         margin: 0;
+    }
+}
+
+.camp {
+    &-full-container {
+        position: relative;
+    }
+    &-icons-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    &__total-sites span {
+        font-size: 14px;
+        font-style: italic;
     }
 }
 

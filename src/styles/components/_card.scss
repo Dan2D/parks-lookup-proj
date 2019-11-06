@@ -4,3 +4,83 @@
     border-radius: 5px;
     padding: 10px;
 }
+
+
+.camp-card {
+    &-content-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        width: 120px;
+        margin: 5px 5px 5px 0;
+        padding: 5px;
+        background: $reg-tan;
+        border-radius: 2px;
+    }
+    &__title {
+        width: 120px;
+        margin: 0 auto;
+        font-size: 14px;
+        text-align: center;
+    }
+    &__icon::before,
+    &__icon::after {
+        font-family: "icons";
+        font-size: 26px;
+        font-style: normal;
+    }
+    &__icon{
+        &--other::before {
+            content: "\ec8e";
+        }
+        &--group::before {
+            content: "\ecf4";
+        }
+        &--rv::before {
+            content: "\ee17";
+        }
+        &--electric::before {
+            content: "\ee84";
+        }
+        &--horse::before {
+            content: "\e862";
+        }
+        &--tent {
+            height: 25px;
+            width: 25px;
+            background-image: url("../assets/images/tent-icon.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        &--toilets::before {
+            content: "\ef89";
+           margin: -7px;
+        }
+        &--toilets::after {
+            content: "\ecf0";  
+            margin: -7px;
+        }
+        &--showers::before {
+            content: "\e801";
+        }
+        &--firewood::before {
+            content: "\efbd";
+        }
+        &--dump::before {
+            content: "\e9af";
+        }
+        &--water::before {
+            content: "\f027";
+        }
+        &--food-storage::before {
+            content: "\ef7a";
+        }
+    }
+    &__txt {
+        font-size: 14px;
+        margin: 0;
+    }
+}

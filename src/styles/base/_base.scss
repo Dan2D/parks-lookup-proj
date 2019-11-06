@@ -68,29 +68,5 @@ a {
   &--expand {
     display: none;
   }
-  &__spinner {
-    height: 100%;
-    animation: ani-loader 2000ms linear infinite;
-  }
 }
 
-@keyframes ani-loader {
-  0% {
-    transform:rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes ani-loader-dots {
-  0% {
-      opacity:1;
-  }
-  60% {
-      opacity:0;
-  }
-  100% {
-    opacity: 1;
-  }
-}

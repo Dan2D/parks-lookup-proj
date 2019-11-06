@@ -28,11 +28,11 @@ function SearchPage({stateName, parksResults, isLoading}) {
     })
 
     return (
-            <div class="search-results-container">
+            <div className="search-results-container">
                 {loader && <Loader isLoading={isLoading} />}
                 {!isLoading && 
                     <>
-                    <h1 class="state-title">{`${stateName} PARKS`}</h1>
+                    <h1 className="state-title">{`${stateName} PARKS`}</h1>
                     {parksList}
                     </>
                 }

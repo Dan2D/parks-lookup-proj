@@ -15,8 +15,10 @@ function App() {
             </header>
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/state=:stateId" component={Search} />
-                <Route path="/parks=:parkId" component={ParkPage} />
+                <Route path="/state/:stateId" component={Search} />
+                <Route path="/parks/:parkId" render={props => (
+                    <ParkPage key={props.match.params.parkId} {...props}/>
+                )} />
             </Switch>
         </Router>
 

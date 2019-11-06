@@ -4,7 +4,7 @@ import Searchbar from "./searchbar/Searchbar";
 function Hero() {
     return (
         <div className="hero-container">
-            <div class="hero-content">
+            <div className="hero-content">
                 <h1 className="hero-txt">CHOOSE A DESTINATION</h1>
                 <Searchbar dropdown={true} />
             </div>

@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 
 function Loader({isLoading, expand}) {
 
-    if (!isLoading) {
-        console.log("FADE OUT")
-        let loader = document.querySelector(".loader");
-        loader.classList.add("fade");
-        setTimeout(() => {loader.classList.add("inactive")}, 300);
-    }
+    // if (!isLoading && document.querySelector(".loader")) {
+    //     let loader = document.querySelector(".loader");
+    //     loader.classList.add("fade");
+    //     setTimeout(() => {loader.classList.add("inactive")}, 300);
+    // }
 
     const defaultOptions = {
         loop: true,

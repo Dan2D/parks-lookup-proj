@@ -18,8 +18,8 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
     let newsArr=[];
     if (Object.keys(news).length < 1){
         newsArr.push(
-            <div key="no-news" class="news__content">
-                <p class="news__none">
+            <div key="no-news" className="news__content">
+                <p className="news__none">
                     There is currently no news on this park.
                 </p>
             </div>
@@ -27,23 +27,24 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
     }
     else {
         Object.keys(news).forEach(key => {
+            const NEWS_ID = news[key].id;
             const NEWS_TITLE = news[key].title;
             const NEWS_DATE = news[key].releasedate;
             const NEWS_ABSTRACT = news[key].abstract;
             const NEWS_URL = news[key].url;
             newsArr.push(
-                <div class="news__content card">
-                    <h2 class="news__title">
+                <div key={NEWS_ID} className="news__content card">
+                    <h2 className="news__title">
                         {NEWS_TITLE}
                     </h2>
-                    <span class="news__date">
+                    <span className="news__date">
                         {formatDate(NEWS_DATE)}
                     </span>
-                    <p class="news_txt">
-                        <strong>Abstract</strong>:
+                    <p className="news_txt">
+                        <strong>Abstract</strong>:<br/>
                         {Parser(NEWS_ABSTRACT)}
                     </p>
-                    <a href={NEWS_URL} class="news__lnk">More Info</a>
+                    <a href={NEWS_URL} className="news__lnk">More Info</a>
                 </div>
             )
         });
@@ -57,19 +58,19 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
 
     return (
         <div className='news-container'>
-            <h2 class="park__section-title park__section-title--news">
+            <h2 className="park__section-title park__section-title--news">
                 NEWS
             </h2>
             <input 
                 type="checkbox" 
                 style={{display: "none"}} 
                 name={`btn-expand--news`} 
-                d={`btn-expand--news`} 
+                id={`btn-expand--news`} 
                 className='btn-expand btn-expand--news' 
             />
             <label 
                 htmlFor={`btn-expand--news`} 
-                class="btn-expand-label btn-expand-label--news"
+                className="btn-expand-label btn-expand-label--news"
                 onClick={() => handleNewsExpand(parkCode)}
             />
             {newsLoaded && <LoaderDots expand={true} />}

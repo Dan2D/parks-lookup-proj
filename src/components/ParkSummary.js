@@ -18,24 +18,24 @@ function ParkSummary({parkNum, parkName, parkDscrpt, parkCode, setPark}) {
     }
 
     return (
-        <div class="expanding-div">
-            <div class="park-title-container">
-                <span class="park-title__num">
+        <div className="expanding-div">
+            <div className="park-title-container">
+                <span className="park-title__num">
                     {parkNum + 1}
                 </span>
-                <h2 class="park-title__name">
+                <h2 className="park-title__name">
                     {parkName}
                 </h2>
             </div>
             <input type="checkbox" style={{display: "none"}} name={`btn-expand${parkNum + 1}`} id={`btn-expand${parkNum + 1}`} className='btn-expand' />
-            <label htmlFor={`btn-expand${parkNum + 1}`} class="btn-expand-label"></label>
-            <div class="expand-content">
-                <p class="park-description">
+            <label htmlFor={`btn-expand${parkNum + 1}`} className="btn-expand-label"></label>
+            <div className="expand-content">
+                <p className="park-description">
                     {parkDscrpt}
                 </p>
-                <Link to={`/parks=${parkCode}`} class="btn btn--park-lnk" onClick={() => handleParkClick()}>
+                <Link to={`/parks/${parkCode}`} className="btn btn--park-lnk" onClick={() => handleParkClick()}>
                     GO TO PARK
-                    <img class="dropdown__btn" src={require("../assets/images/arrow-down.png")} alt=""/>    
+                    <img className="dropdown__btn" src={require("../assets/images/arrow-down.png")} alt=""/>    
                 </Link>
             </div>
         </div>
