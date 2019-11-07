@@ -1,19 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
+import { handleSearchScroll } from "../../utils/genHelpers";
 
 
 import SummarySection from "../SummarySection";
 import MapContainer from "../MapContainer";
+import Searchbar from "../searchbar/Searchbar";
 import Loader from "../Loaders/Loader";
 
-// TODO(ADD STATE SELECT ON SEARCH PAGE TOO)
+// TODO(LINK PARK SUMMARY LINKS TO MAP ICONS, CLICK ON ONE AND FOCUSES ON MAP OR OPENS SUMMARY)
 //CONTAINER COMPONENT
 function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
     const [loader, setLoader] = useState(false);
+    const [showMap, setShowMap] = useState(false);
+
     useEffect(() => {
-        if (isLoading){
-            setLoader(true);
-        }
+        if (isLoading){setLoader(true);}
+        else {setShowMap(true);}
+        window.addEventListener('scroll', () => handleSearchScroll());
+        return window.removeEventListener('scroll', () => handleSearchScroll());
     }, [isLoading])
 
     let parksList = [];
@@ -42,11 +47,16 @@ function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
                     </>
                 }
             </div>
-            <div id="mapid">
-                {!isLoading && 
-                <MapContainer parks={parksResults} statePos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} zoom={stateData[stateAbb].zoom}/>}
-                
-            </div>
+            {showMap &&
+                <div className='map-section-container'>
+                    <div className='map-container'>
+                        {!isLoading && 
+                            <MapContainer parks={parksResults} statePos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} zoom={stateData[stateAbb].zoom}/>
+                        }
+                    </div>  
+                    <Searchbar dropdown={false}/>
+                </div>
+            }
         </div>
     )
 }

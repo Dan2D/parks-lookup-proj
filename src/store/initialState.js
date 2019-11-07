@@ -11,7 +11,7 @@ export const initialState = {
            byId: {
                "AL": {
                     name: "Alabama",
-                    lat: 32.806671,
+                    lat: 33.806671,
                     lng:-86.791130,
                     zoom: 7
                },

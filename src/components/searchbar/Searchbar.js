@@ -53,16 +53,18 @@ function Searchbar({dropdown, states, setState}) {
                 </select> :
                 <input type="search" name="hero-searchbar" className="searchbar searchbar--hero"/>
             }
-            <div className="dropdown dropdown--hero" tabIndex="-1" onClick={() => setToggleDropdown(!toggleDropdown)} onBlur={() => setToggleDropdown(!toggleDropdown)}>
-                <span>{select}</span>
-                <img className="dropdown__btn" src={require("../../assets/images/arrow-down.png")} alt=""/>
-               {toggleDropdown && 
-                    <div className="dropdown__menu">
-                        <div className="dropdown__option" data-value="state" onClick={(e) => handleDropdownSelect(e)}>STATE</div>
-                        <div className="dropdown__option" data-value="parks" onClick={(e) => handleDropdownSelect(e)}>PARKS</div>
-                    </div>
-                }
-            </div>
+            {dropdown &&
+                <div className="dropdown dropdown--hero" tabIndex="-1" onClick={() => setToggleDropdown(!toggleDropdown)} onBlur={() => setToggleDropdown(!toggleDropdown)}>
+                    <span>{select}</span>
+                    <img className="dropdown__btn" src={require("../../assets/images/arrow-down.png")} alt=""/>
+                {toggleDropdown && 
+                        <div className="dropdown__menu">
+                            <div className="dropdown__option" data-value="state" onClick={(e) => handleDropdownSelect(e)}>STATE</div>
+                            <div className="dropdown__option" data-value="parks" onClick={(e) => handleDropdownSelect(e)}>PARKS</div>
+                        </div>
+                    }
+                </div>
+            }
             <Link to={`/state/${selectVal}`} className="btn btn--hero-go" onClick={(e) => handleSearch(e)}>EXPLORE</Link>
         </div>
     )
