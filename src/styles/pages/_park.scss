@@ -204,6 +204,10 @@
 }
 
 
-.map-container {
+#mapid {
+    height: 400px;
     width: 45vw;
+}
+.leaflet-container {
+    height: 400px;
 }

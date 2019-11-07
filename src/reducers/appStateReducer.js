@@ -8,7 +8,8 @@ const appStateReducer = (state = initialState, action) => {
        case types.SET_STATE:
            return {
                ...state,
-                   state: action.payload
+                   state: action.payload,
+                   stateAbb: action.stateAbbrev
            }
         case types.SET_PARK:
             return {

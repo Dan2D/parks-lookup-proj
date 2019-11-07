@@ -8,6 +8,7 @@ import ParkVC from "../ParkVCenters";
 import ParkAlerts from "../ParkAlerts";
 import ParkEvents from "../ParkEvents";
 import ParkNews from "../ParkNews";
+import MapContainer from "../MapContainer";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -81,9 +82,10 @@ function ParkPage({parks, parkCode, parkContent, alerts, getEvents, getNews, get
                     {content === 'camps' && <ParkCamps parkCode={parkCode} />}
                     {content === 'vc' && <ParkVC parkCode={parkCode} />}
                 </div>
-                <div className="map-container">
-
+                <div id="mapid">
+                    <MapContainer />
                 </div>
+                
             </div>
         </div>
     )
