@@ -1,20 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getEvents } from "../actions/parksDataActions";
 import Parser from 'react-html-parser';
 import { formatDate } from "../utils/genHelpers";
 
+import ExpandBtn from "./ExpandBtn";
 import LoaderDots from "./Loaders/LoaderDots";
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getEvents: (parkCode) => {
-            return dispatch(getEvents(parkCode));
-        }
-    }
-}
-
-function ParkEvents({parkCode, eventPark, events, getEvents, isLoading}) {
+function ParkEvents({parkCode, eventPark, events, isLoading}) {
     
 //TODO(Make into own component, getting a little messy)
     let eventsArr = [];
@@ -83,25 +75,12 @@ function ParkEvents({parkCode, eventPark, events, getEvents, isLoading}) {
         });
     
     }
-    
-    function handleEventExpand() {
-        if (parkCode === eventPark){
-            return
-        }
-        getEvents(parkCode);
-    }
-
     return (
         <div className='events-container'>
             <h2 className="park__section-title park__section-title--events">
                 EVENTS
             </h2>
-            <input type="checkbox" style={{display: "none"}} name={`btn-expand--events`} id={`btn-expand--events`} className='btn-expand btn-expand--events' />
-            <label 
-                htmlFor={`btn-expand--events`} 
-                className="btn-expand-label btn-expand-label--events"
-                onClick={() => handleEventExpand()}
-                />
+            <ExpandBtn identifier='--events' />
             {isLoading && <LoaderDots isLoading={isLoading} expand={true} />}
             {!isLoading && eventsArr}
         </div>
@@ -112,8 +91,7 @@ const mapStateToProps = state => {
     return {
         isLoading: state.parksData.events.loading,
         events: state.parksData.events.byId,
-        eventPark: state.parksData.events.parkCode
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParkEvents)
+export default connect(mapStateToProps, null)(ParkEvents)

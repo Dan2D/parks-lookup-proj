@@ -2,7 +2,7 @@ import * as types from "../constants/types";
 import {setIds, getAllIds} from "../utils/apiHelpers";
 import * as apiConst from "../constants/apiConstants";
 import axios from 'axios';
-
+// TODO(COMBINE ALL DATA ACTIONS INTO ONE)
 const PARKS_API_KEY = process.env.PARKS_API_KEY;
 
 export const setState = (state, stateFull) => dispatch => {
@@ -46,6 +46,23 @@ export const getCampgrounds = parkCode => dispatch => {
         })
     })
     .catch(err => dispatch({type: types.GET_ALERTS_FAIL, payload: err.message}));
+}
+
+export const getVCenters = parkCode => dispatch => {
+    dispatch({type: types.GET_VCENTER, name: 'visitorCenters'});
+    axios.get(`https://developer.nps.gov/api/v1/visitorcenters?parkCode=${parkCode}&api_key=mm2kgLr5MJWCd3o5f2XFKmepJ2bbgeHyaX3ilTfa`)
+    .then(res => {
+        let idObj = setIds(res.data.data, "id");
+        let allIds = getAllIds(idObj);
+        dispatch({
+            type: types.GET_VCENTER_SUCCESS,
+            payload: idObj,
+            allIds,
+            name: 'visitorCenters',
+            parkCode
+        })
+    })
+    .catch(err => dispatch({type: types.GET_VCENTER_FAIL, payload: err.message}));
 }
 
 export const getAlerts = parkCode => dispatch => {

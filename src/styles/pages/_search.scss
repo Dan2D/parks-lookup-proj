@@ -8,7 +8,7 @@
     text-decoration: underline;
 }
 
-.expanding-div {
+.park-section-container {
     position: relative;
     display: inline-block;
     border-radius: 5px;
@@ -33,28 +33,12 @@
     }
 }
 
-.btn-expand-label::after {
-    position: absolute;
-    top: 0px;
-    right: 5px;
-    font-family: "icons";
-    content: "\efc2";
-    font-size: 24px;
-    font-weight: 700;
-    padding: 5px 10px;
-}
-
-.btn-expand {
-    &:checked ~ .btn-expand-label::after {
-        content: "\ef9a";
-    }
-    &:checked ~ .expand-content {
-        display: block;
-    }
-}
-
-.expand-content {
+.park-summary-container {
     display: none;
+}
+
+.btn-expand:checked ~ .park-summary-container {
+    display: block;
 }
 
 .park-description {

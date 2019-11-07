@@ -1,0 +1,17 @@
+.park-section-container {
+    position: relative;
+}
+
+.section {
+    &-title-container {
+        display: flex;
+        align-items: baseline;
+    }
+    &__num {
+        font-size: 28px;
+    }
+    &__title {
+        margin-left: 10px;
+        width: 80%;
+    }
+}

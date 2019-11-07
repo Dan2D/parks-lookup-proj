@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import { getEvents, getNews, getCampgrounds } from "../../actions/parksDataActions";
+import { getEvents, getNews, getCampgrounds, getVCenters } from "../../actions/parksDataActions";
 
 import ParkNav from "../ParkNav";
 import ParkCamps from "../ParkCamps";
+import ParkVC from "../ParkVCenters";
 import ParkAlerts from "../ParkAlerts";
 import ParkEvents from "../ParkEvents";
 import ParkNews from "../ParkNews";
@@ -18,12 +19,14 @@ const mapDispatchToProps = dispatch => {
         },
         getCampgrounds: (parkCode) => {
             return dispatch(getCampgrounds(parkCode));
+        },
+        getVCenters: (parkCode) => {
+            return dispatch(getVCenters(parkCode));
         }
     }
 }
-//GETTING ALL PARK CONTENT AT ONCE, BUT ONLY REVEAL WHEN USER CLICKS, NO LOAD TIME!
-//ALSO MAKE SURE ONLY GET DATA WHEN PARKCODE DOESN'T MATCH
-function ParkPage({parks, parkCode, parkContent, alerts, getEvents, getNews, getCampgrounds, ...props}) {
+
+function ParkPage({parks, parkCode, parkContent, alerts, getEvents, getNews, getCampgrounds, getVCenters, ...props}) {
     const PARK_STATES = parks[parkCode].states;
     const PARK_NAME = parks[parkCode].fullName;
     const PARK_DSCRPT = parks[parkCode].description;
@@ -31,16 +34,16 @@ function ParkPage({parks, parkCode, parkContent, alerts, getEvents, getNews, get
     const [content, setContent] = useState("general");
 
     useEffect(() => {
+        console.log(props.vcPark, parkCode);
         props.eventPark !== parkCode && getEvents(parkCode);
         props.newsPark !== parkCode && getNews(parkCode);
         props.campsPark !== parkCode && getCampgrounds(parkCode);
-        if (props.match.params.parkId.includes("campgrounds")){
-            setContent("camps")
+        props.vcPark !== parkCode && getVCenters(parkCode);
+        if (props.match.params.content){
+            let content = props.match.params.content;
+            content === 'campgrounds' ? setContent('camps') : setContent('vc');
         }
-        else if (props.match.params.parkId.includes("vcenters")){
-            setContent("vcenters");
-        }
-    }, [props.match.params.parkId])
+    }, [props.match.params])
 
     function handleNavClick(navContent) {
         setContent(navContent);
@@ -75,7 +78,8 @@ function ParkPage({parks, parkCode, parkContent, alerts, getEvents, getNews, get
                             <ParkNews parkCode={parkCode} />
                         </>
                     }
-                    {content === "camps" && <ParkCamps parkCode={parkCode} />}
+                    {content === 'camps' && <ParkCamps parkCode={parkCode} />}
+                    {content === 'vc' && <ParkVC parkCode={parkCode} />}
                 </div>
                 <div className="map-container">
 
@@ -95,7 +99,8 @@ const mapStateToProps = state => {
         alerts: PARK_DATA.alerts.byId,
         eventPark: PARK_DATA.events.parkCode,
         newsPark: PARK_DATA.news.parkCode,
-        campsPark: PARK_DATA.campgrounds.parkCode
+        campsPark: PARK_DATA.campgrounds.parkCode,
+        vcPark: PARK_DATA.visitorCenters.parkCode
     }
 }
 

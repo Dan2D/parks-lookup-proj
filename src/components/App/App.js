@@ -6,7 +6,7 @@ import Home from "../pages/Homepage";
 import Search from "../pages/SearchPage";
 import ParkPage from "../pages/ParkPage";
 import "../../styles/main.scss";
-
+//TODO(ADD PROP-TYPES)
 function App() {
     return (
         <Router>
@@ -16,9 +16,10 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/state/:stateId" component={Search} />
-                <Route path="/parks/:parkId" render={props => (
+                <Route path="/parks/:parkId/:content?" render={props => (
                     <ParkPage key={props.match.params.parkId} {...props}/>
                 )} />
+
             </Switch>
         </Router>
 

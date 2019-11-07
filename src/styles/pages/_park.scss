@@ -1,38 +1,25 @@
-.park-page-container {
-    min-height: 100vh;
-    padding: 0 30px;
-    background: $light-tan;
-}
-
-.park-container {
-    display: flex;
-}
-
-.park-content-container,
-.map-container {
-    padding: 20px 10px;
-    width: 45vw;
-    & p {
-        font-size: 18px;
-    }
-}
-
-.park__section-title::after,
-.alert__category::after {
-    position: absolute;
-    top: 2px;
-    right: -25px;
-    font-family: "icons";
-    font-size: 18px;
-}
-
-.park__section-title::after {
-    top: -4px;
-    right: -45px;
-    font-size: 32px;
-}
-
 .park {
+    &-page-container {
+        min-height: 100vh;
+        padding: 0 30px;
+        background: $light-tan;
+    }
+    &-container {
+        display: flex;
+    }
+    &-content-container {
+        padding: 20px 10px;
+        width: 45vw;
+        & p {
+            font-size: 18px;
+        }
+    }
+    &__states {
+        position: relative;
+        font-size: 16px;
+        font-style: italic;
+        top: -10px;
+    }
     &__section-title {
         position: relative;
         display: inline-block;
@@ -56,6 +43,22 @@
         margin-top: 0;
     }
 }
+
+.park__section-title::after,
+.alert__category::after {
+    position: absolute;
+    top: 2px;
+    right: -25px;
+    font-family: "icons";
+    font-size: 18px;
+}
+
+.park__section-title::after {
+    top: -4px;
+    right: -45px;
+    font-size: 32px;
+}
+
 
 .alerts-container,
 .events-container,
@@ -141,6 +144,29 @@
     &-full-container {
         position: relative;
     }
+    &__content {
+        position: relative;
+    }
+    &-vc-container {
+        position: relative;
+    }
+    &-title-container {
+        display: flex;
+        align-items: baseline;
+    }
+    &__num {
+        font-size: 28px;
+    }
+    &__name {
+        margin-left: 10px;
+        width: 80%;
+    }
+    &__dscrpt {
+        // white-space: pre;
+    }
+    &__specs {
+        display: none;
+    }
     &-section-container {
         margin: 10px 0;
     }
@@ -163,7 +189,6 @@
 
 .btn-expand-label--events::after,
 .btn-expand-label--news::after {
-    cursor: pointer;
     position: relative;
     top: -1px;
     right: 0;
@@ -172,7 +197,9 @@
 .btn-expand--events:checked ~ .event__content,
 .btn-expand--events:checked ~ .loader--expand,
 .btn-expand--news:checked ~ .news__content,
-.btn-expand--news:checked ~ .loader--expand {
+.btn-expand--news:checked ~ .loader--expand, 
+.btn-expand--camp:checked ~ .camp__specs,
+.btn-expand--camp:checked ~ .loader--expand{
     display: block;
 }
 

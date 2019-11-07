@@ -1,6 +1,6 @@
 import * as types from "../constants/types";
 
-
+// TODO(ADD FAIL CONDITION)
 let initialState = {};
 
 const parksDataReducer = (state = initialState, action) => {
@@ -11,7 +11,6 @@ const parksDataReducer = (state = initialState, action) => {
        case types.GET_ALERTS:
        case types.GET_EVENTS:
        case types.GET_NEWS:
-           console.log(action)
            return {
                ...state,
                [action.name]: {
@@ -21,7 +20,6 @@ const parksDataReducer = (state = initialState, action) => {
            }
        case types.GET_PARKS_SUCCESS:
        case types.GET_ALERTS_SUCCESS: 
-       console.log(action)
            return {
                 ...state,
                 [action.name]: {
@@ -34,7 +32,6 @@ const parksDataReducer = (state = initialState, action) => {
         case types.GET_VCENTER_SUCCESS:
         case types.GET_EVENTS_SUCCESS:
         case types.GET_NEWS_SUCCESS:
-                console.log(action)
             return {
                 ...state,
                 [action.name]: {

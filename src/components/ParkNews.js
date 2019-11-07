@@ -1,18 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Parser from 'react-html-parser';
-import { getNews } from "../actions/parksDataActions";
 import { formatDate } from "../utils/genHelpers";
 
 import LoaderDots from "./Loaders/LoaderDots";
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getNews: (parkCode) => {
-            return dispatch(getNews(parkCode));
-        }
-    }
-}
+import ExpandBtn from "./ExpandBtn";
 
 function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
     let newsArr=[];
@@ -48,31 +40,14 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
                 </div>
             )
         });
-    }
-    
-
-    function handleNewsExpand(parkCode) {
-        if (parkCode === newsPark){return}
-        getNews(parkCode);
-    }
+    };
 
     return (
         <div className='news-container'>
             <h2 className="park__section-title park__section-title--news">
                 NEWS
             </h2>
-            <input 
-                type="checkbox" 
-                style={{display: "none"}} 
-                name={`btn-expand--news`} 
-                id={`btn-expand--news`} 
-                className='btn-expand btn-expand--news' 
-            />
-            <label 
-                htmlFor={`btn-expand--news`} 
-                className="btn-expand-label btn-expand-label--news"
-                onClick={() => handleNewsExpand(parkCode)}
-            />
+            <ExpandBtn identifier='--news' />
             {newsLoaded && <LoaderDots expand={true} />}
             {!newsLoaded && newsArr}
         </div>
@@ -83,8 +58,7 @@ const mapStateToProps = state => {
     return {
         newsLoaded: state.parksData.news.loading,
         news: state.parksData.news.byId,
-        newsPark: state.parksData.news.parkCode
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParkNews)
+export default connect(mapStateToProps, null)(ParkNews)

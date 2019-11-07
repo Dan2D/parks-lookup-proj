@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import ParkSummary from "../ParkSummary";
 import { connect } from 'react-redux';
 
+// import ParkSummary from "../ParkSummary";
+import SummarySection from "../SummarySection";
 import Loader from "../Loaders/Loader";
 
 //CONTAINER COMPONENT
@@ -17,11 +18,12 @@ function SearchPage({stateName, parksResults, isLoading}) {
     Object.keys(parksResults).forEach((key, ind) => {
         let park = parksResults[key];
         parksList.push(
-            <ParkSummary 
+            <SummarySection
                 key={park.id} 
-                parkNum={ind} 
-                parkName={park.fullName} 
-                parkDscrpt={park.description} 
+                num={ind + 1} 
+                title={park.fullName} 
+                dscrpt={park.description} 
+                type='park'
                 parkCode={park.parkCode}
             />
         )

@@ -15,10 +15,10 @@ function ParkNav({parkCode, getCampgrounds, onClick}) {
 
     return (
         <nav className="park-nav-container">
-            <Link to={`/parks/${parkCode}&query=campgrounds`} className='park-nav__lnk park-nav__lnk--camps' onClick={() => console.log("HELLO")}>
+            <Link to={`/parks/${parkCode}/campgrounds`} className='park-nav__lnk park-nav__lnk--camps'>
                 CAMPGROUNDS
             </Link>
-            <Link to={`/parks/${parkCode}/visitorscenters`} className='park-nav__lnk park-nav__lnk--vcenters' onClick={() => onClick('vcenters')}>
+            <Link to={`/parks/${parkCode}/visitorscenters`} className='park-nav__lnk park-nav__lnk--vcenters'>
                 VISITOR'S CENTERS
             </Link>
         </nav>
