@@ -34,7 +34,9 @@ function ParkCamps({camps, isLoading}) {
                     </p>
                     <CampCardSection title="campsites" data={CAMP_SITES} />
                     <CampCardSection title="amenities" data={CAMP_AMENITIES} />
+                    <CampCardSection title="accessibility" data={CAMP_ACCESSIBLE} />
                     {/* <a className='camp__direction-url' href={CAMP_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer">Directions To Campsite</a> */}
+                    <hr/>
                 </div>
             )
         })

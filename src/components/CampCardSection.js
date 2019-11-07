@@ -9,6 +9,7 @@ function Campsites({title, data}) {
         CAMPSITE_HORSE_CNT, CAMPSITE_GROUP_CNT, CAMPSITE_RV_ONLY_CNT, 
         CAMPSITE_TENT_ONLY_CNT, CAMPSITE_TOTAL_CNT;
     let AMENITY_TOILETS, AMENITY_DUMP, AMENITY_WATER, AMENITY_FIREWOOD, AMENITY_FOOD_STORAGE;
+    let ACCESIBLE_ADA, ACCESSIBLE_FIRE, ACCESSIBLE_RV, ACCESSIBLE_ROADS;
 
     if (title.includes("campsites")) {
          CAMPSITE_OTHER_CNT = data.other;
@@ -26,6 +27,12 @@ function Campsites({title, data}) {
          AMENITY_FIREWOOD = checkAvailability(data.firewoodforsale);
          AMENITY_FOOD_STORAGE = checkAvailability(data.foodstoragelockers);
     }
+    else if (title.includes("accessibility")){
+        ACCESIBLE_ADA = data.adainfo;
+        ACCESSIBLE_FIRE = data.firestovepolicy;
+        ACCESSIBLE_RV = data.rvinfo;
+        ACCESSIBLE_ROADS = data.accessroads.join();
+    }
 
 
     function checkAvailability(str){
@@ -39,7 +46,7 @@ function Campsites({title, data}) {
 
     const campSites = (
         <>
-            <div className="camp-icons-container">
+            <div className='camp-icons-container'>
                 {CAMPSITE_OTHER_CNT != 0 && <CampCard title="Other" type="other" num={CAMPSITE_OTHER_CNT} txt=""/>}
                 {CAMPSITE_GROUP_CNT != 0 && <CampCard title="Group" type="group" num={CAMPSITE_GROUP_CNT} txt=""/>}
                 {CAMPSITE_RV_ONLY_CNT != 0 && <CampCard title="RV Only" type="rv" num={CAMPSITE_RV_ONLY_CNT} txt=""/>}
@@ -48,14 +55,15 @@ function Campsites({title, data}) {
                 {CAMPSITE_TENT_ONLY_CNT != 0 && <CampCard title="Tent Only" type="tent" num={CAMPSITE_TENT_ONLY_CNT} txt=""/>}
             </div>
             <p className='camp__total-sites'>
-                {`Total Designated Sites - ${CAMPSITE_TOTAL_CNT}`}<br/>
+                <strong>Total Designated Sites </strong>
+                {`- ${CAMPSITE_TOTAL_CNT}`}<br/>
                 <span>(May not include primitive)</span>
             </p>
         </>
     );
 
     const campAmenities = (
-        <div className="camp-icons-container">
+        <div className='camp-icons-container'>
             {AMENITY_DUMP && <CampCard title="Trash" type="dump"txt={AMENITY_DUMP}/>}
             {AMENITY_TOILETS && <CampCard title="Toilets" type="toilets" txt={AMENITY_TOILETS}/>}
             {AMENITY_WATER && <CampCard title="Water" type="water" txt={AMENITY_WATER} />}
@@ -64,14 +72,39 @@ function Campsites({title, data}) {
         </div>
     )
 
+    const campAccessibility = (
+        <div className='accessibility-container'>
+            {ACCESIBLE_ADA &&
+            <p className='camp__ada'>
+                <strong>ADA Info</strong><br/>
+                {ACCESIBLE_ADA}
+            </p>}
+           {ACCESSIBLE_FIRE &&
+            <p className='camp__fire-policy'>
+                <strong>Fire-Stove Policy</strong><br/>
+                {ACCESSIBLE_FIRE}
+            </p>}
+            {ACCESSIBLE_RV &&
+             <p className='camp__rv-info'>
+                <strong>RV Info</strong><br/>
+                {ACCESSIBLE_RV}
+            </p>}
+            {ACCESSIBLE_ROADS &&
+             <p className='camp__access-roads'>
+                <strong>Access Roads</strong><br/>
+                {ACCESSIBLE_ROADS}
+            </p>}
+        </div>
+    )
 
     return (
-        <div className={`${CLASS}-container`}>
-            <h3 className='camp__section-title'>
+        <div className={`camp-section-container camp-section-container--${CLASS}`}>
+            <h4 className='camp__section-title'>
                 {TITLE}
-            </h3>
+            </h4>
             {title.includes("campsites") && campSites}
             {title.includes("amenities") && campAmenities }
+            {title.includes("accessibility") && campAccessibility}
         </div>
     )
 }

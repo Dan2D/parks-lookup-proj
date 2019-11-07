@@ -141,14 +141,23 @@
     &-full-container {
         position: relative;
     }
+    &-section-container {
+        margin: 10px 0;
+    }
     &-icons-container {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-end;
     }
-    &__total-sites span {
-        font-size: 14px;
-        font-style: italic;
+    &__total-sites {
+        margin: 0;
+        &span {
+            font-size: 14px;
+            font-style: italic;
+        }
+    }
+    &__ada {
+        margin-top: 0;
     }
 }
 
