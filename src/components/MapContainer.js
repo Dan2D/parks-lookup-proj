@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import L from 'leaflet';
 import {Map, TileLayer, Marker, Popup, Tooltip} from 'react-leaflet';
 
-function MapContainer({statePos, zoom, parks}) {
+function MapContainer({parks, statePos, zoom, }) {
     const [position, setPosition] = useState(statePos);
-    
 
+    function handleMarkerClick(num) {
+        let btn = document.querySelector(`label.btn-expand-label${num}`);
+        btn.click();
+    }
 
     let markerArr=[];
     Object.keys(parks).forEach((key, ind) => {
@@ -14,16 +17,19 @@ function MapContainer({statePos, zoom, parks}) {
                 iconSize: null, 
                 iconAnchor: [40, 22],
                 tooltipAnchor: [0, 0],
-                html: `<span>${parseInt(ind+1)}</span>` });
+                popupAnchor: [-27, -20],
+                html: `<span class='marker-${ind+1}'>${parseInt(ind+1)}</span>` });
         const PARK_NAME = parks[key].name;
         const COORD = formatCoord(parks[key].latLong);
         if (COORD){
             markerArr.push(
-                <Marker key={key} position={COORD} icon={numIcon} >
+                <Marker key={key} position={COORD} icon={numIcon} onClick={() => handleMarkerClick(ind+1)}>
                     <Popup>
                         <span>{PARK_NAME}</span>
                     </Popup>
-                    <Tooltip direction='left' offset={[-40, 0]}>{PARK_NAME}</Tooltip>
+                    <Tooltip className={`tooltip-${ind+1}`} direction='left'  permanent={true}>
+                        {PARK_NAME}
+                    </Tooltip>
                 </Marker>
             )
         }

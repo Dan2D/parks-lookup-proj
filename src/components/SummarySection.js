@@ -14,11 +14,11 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-function SummarySection({num, title, dscrpt, url, type, setPark, parkCode}) {
+function SummarySection({num, title, dscrpt, url, type, setPark, parkCode, ...props}) {
     const TYPE_PARK = type === 'park';
     const parkContent = (
         <>
-            <ExpandBtn identifier={num} />
+            <ExpandBtn identifier={num}/>
             <div className='park-summary-container'>
                 <p className={`section-dscrpt`}>{dscrpt}</p>
                 <Link to={`/parks/${parkCode}/`} className="btn btn--park-lnk" onClick={() => setPark(parkCode)}>
@@ -42,8 +42,10 @@ function SummarySection({num, title, dscrpt, url, type, setPark, parkCode}) {
     )
 
     return (
-        <section className='park-section-container'>
-            <div className='section-title-container'>
+        <section className='park-section-container' 
+                 onMouseEnter={() => props.onMouseEnter(num)} 
+                 onMouseLeave={() => props.onMouseLeave(num)}>
+            <div className='section-title-container' >
                 <span className='section__num'>{num}</span>
                 <h3 className={`section__title`}>{title}</h3>
             </div>
