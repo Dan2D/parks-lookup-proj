@@ -13,14 +13,11 @@ function App() {
             <header className="app-header">
                 <Nav />
             </header>
-            <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/state/:stateId" component={Search} />
-                <Route path="/parks/:parkId/:content?" render={props => (
+                <Route path="/state/:stateId" exact component={Search} />
+                <Route path="/state/:stateId/parks/:parkId/:content?" render={props => (
                     <ParkPage key={props.match.params.parkId} {...props}/>
                 )} />
-
-            </Switch>
         </Router>
 
 

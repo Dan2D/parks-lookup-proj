@@ -14,14 +14,14 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-function SummarySection({num, title, dscrpt, url, type, setPark, parkCode, ...props}) {
+function SummarySection({num, state, title, dscrpt, url, type, setPark, parkCode, ...props}) {
     const TYPE_PARK = type === 'park';
     const parkContent = (
         <>
             <ExpandBtn identifier={num}/>
             <div className='park-summary-container'>
                 <p className={`section-dscrpt`}>{dscrpt}</p>
-                <Link to={`/parks/${parkCode}/`} className="btn btn--park-lnk" onClick={() => setPark(parkCode)}>
+                <Link to={`/state/${state}/parks/${parkCode}/`} className="btn btn--park-lnk" onClick={() => setPark(parkCode)}>
                     GO TO PARK
                     <img className="dropdown__btn" src={require("../assets/images/arrow-down.png")} alt=""/>    
                 </Link>

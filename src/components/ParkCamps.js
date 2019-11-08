@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkIfEmpty } from "../utils/genHelpers";
+import { checkIfEmpty, handleParkHover } from "../utils/genHelpers";
 
 import CampCardSection from "./CampCardSection";
 import ExpandBtn from "./ExpandBtn";
@@ -24,7 +24,10 @@ function ParkCamps({camps, isLoading}) {
             const CAMP_ACCESSIBLE = camps[key].accessibility;
             const CAMP_DIRECTIONS_URL = camps[key].directionsUrl;
             campsArr.push(
-                <div key={key} className='park-section-container camp__content'>
+                <div key={key} 
+                     className='park-section-container camp__content'                
+                     onMouseEnter={() => handleParkHover(ind + 1, 'enter')}
+                     onMouseLeave={() => handleParkHover(ind + 1, 'leave')}>
                     <div className='camp-title-container'>
                         <span className='camp__num'>{ind + 1}</span>
                         <h2 className='camp__name'>

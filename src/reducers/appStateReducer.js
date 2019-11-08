@@ -17,11 +17,21 @@ const appStateReducer = (state = initialState, action) => {
                 park: action.payload,
                 content: "general"
             }
+        case types.GET_PARKS: 
+        return {
+            ...state,
+            loading: true
+        }
         case types.GET_CAMPGROUNDS:
         return {
             ...state,
             content: "camps"
         }
+        case types.GET_PARKS_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            }
         case types.GET_PARKS_FAIL:
         case types.GET_ALERTS_FAIL:
         case types.GET_EVENTS_FAIL:

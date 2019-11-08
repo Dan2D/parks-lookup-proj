@@ -25,7 +25,7 @@ export const initialState = {
                     name: "Arizona",
                     lat: 33.729759,
                     lng: -111.431221,
-                    zoom: 7
+                    zoom: 6
                 },
                 "AR": {
                     name: "Arkansas",
@@ -288,8 +288,8 @@ export const initialState = {
                 "WA": {
                     name: "Washington",
                     lat: 47.400902,
-                    lng: -121.490494,
-                    zoom: 7,
+                    lng: -120.490494,
+                    zoom: 6,
                 },
                 "WV": {
                     name: "West Virginia",

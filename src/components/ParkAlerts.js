@@ -4,6 +4,7 @@ import Parser from 'react-html-parser';
 import Loader from "./Loaders/LoaderDots";
 
 //TODO(Check on loader to see if is actually loading)
+// TODO(ADD EXPAND TO ALERT BOXES AND START OUT MINIFIED)
 function ParkAlerts({alerts, isLoading}) {
     let alertsArr = [];
     if (Object.keys(alerts).length < 1){

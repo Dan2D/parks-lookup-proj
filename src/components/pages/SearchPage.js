@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { handleSearchScroll } from "../../utils/genHelpers";
+import { handleSearchScroll, handleParkHover } from "../../utils/genHelpers";
 
 
 import SummarySection from "../SummarySection";
@@ -9,7 +9,6 @@ import Searchbar from "../searchbar/Searchbar";
 import LoaderDots from "../Loaders/LoaderDots";
 import Loader from "../Loaders/Loader";
 
-// TODO(LINK PARK SUMMARY LINKS TO MAP ICONS, CLICK ON ONE AND FOCUSES ON MAP OR OPENS SUMMARY)
 //CONTAINER COMPONENT
 function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
     const [loader, setLoader] = useState(false);
@@ -22,19 +21,6 @@ function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
         return window.removeEventListener('scroll', () => handleSearchScroll());
     }, [isLoading]);
 
-    function handleParkHover(parkNum, event) {
-        let marker = document.querySelector(`span.marker-${parkNum}`).parentElement;
-        let tooltip = document.querySelector(`div.tooltip-${parkNum}`);
-        if (event === 'enter') {   
-            marker.classList.add('num-icon--hover');
-            tooltip.style.display = 'block';
-        }
-        else {
-           marker.classList.remove("num-icon--hover");
-           tooltip.style.display = 'none';
-        }
-    }
-
     let parksList = [];
     Object.keys(parksResults).forEach((key, ind) => {
         let park = parksResults[key];
@@ -45,6 +31,7 @@ function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
                 title={park.fullName} 
                 dscrpt={park.description} 
                 type='park'
+                state={stateAbb}
                 parkCode={park.parkCode}
                 onMouseEnter={() => handleParkHover(ind + 1, 'enter')}
                 onMouseLeave={() => handleParkHover(ind + 1, 'leave')}
@@ -69,8 +56,8 @@ function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
                     <div className='map-container'>
                         {!isLoading && 
                             <MapContainer 
-                            parks={parksResults} 
-                            statePos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
+                            markers={parksResults} 
+                            pos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
                             zoom={stateData[stateAbb].zoom}
                             />
                         }

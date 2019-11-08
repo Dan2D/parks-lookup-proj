@@ -2,7 +2,7 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import animationData from "../../assets/animations/campfire.json";
 
-function Loader({isLoading, type}) {
+function Loader({isLoading}) {
 
     if (!isLoading) {
         let loader = document.querySelector(".loader");

@@ -33,3 +33,21 @@ export function handleSearchScroll() {
         }
     }
 };
+
+export function formatCoord(data){
+    return data.match(/-?\d*\.\d+/g)
+};
+
+export function handleParkHover(parkNum, event) {
+    console.log(parkNum, event)
+    let marker = document.querySelector(`span.marker-${parkNum}`).parentElement;
+    let tooltip = document.querySelector(`div.tooltip-${parkNum}`);
+    if (event === 'enter') {   
+        marker.classList.add('num-icon--hover');
+        tooltip.style.display = 'block';
+    }
+    else {
+       marker.classList.remove("num-icon--hover");
+       tooltip.style.display = 'none';
+    }
+}

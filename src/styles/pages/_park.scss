@@ -1,11 +1,12 @@
 .park {
     &-page-container {
         min-height: 100vh;
-        padding: 0 30px;
+        padding: 0 10px;
         background: $light-tan;
     }
     &-container {
         display: flex;
+        justify-content: space-between;
     }
     &-content-container {
         padding: 20px 10px;
