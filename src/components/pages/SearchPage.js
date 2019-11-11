@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { handleSearchScroll, handleParkHover } from "../../utils/genHelpers";
-import { getStateParks } from "../../actions/parksDataActions";
+import { setState } from "../../actions/parksDataActions";
 
 
 import SummarySection from "../SummarySection";
@@ -12,28 +12,31 @@ import Loader from "../Loaders/Loader";
 
 const mapDispatchToProps = dispatch => {
     return {
-        getStateParks: (state) => {
-            return dispatch(getStateParks(state));
+        setState: (state, stateFull) => {
+            return dispatch(setState(state, stateFull));
         }
     }
 }
 
 //CONTAINER COMPONENT
-function SearchPage({getStateParks, stateName, parksResults, stateData, isLoading, ...props}) {
-    let stateAbb = props.match.params.stateId;
-    const [loader, setLoader] = useState(false);
+function SearchPage({setState, parksResults, stateName, stateData, parksLoading, ...props}) {
+    const [showLoader, setShowLoader] = useState(false);
     const [showMap, setShowMap] = useState(false);
+    const PARKS = Object.keys(parksResults);
+    const PARKS_LENGTH = PARKS.length;
+    let stateAbb = props.match.params.stateId;
+    let stateFull = stateData[stateAbb].name;
 
     useEffect(() => {
-        Object.keys(parksResults).length < 1 && getStateParks(stateAbb);
-        if (isLoading){setLoader(true);}
+        (PARKS_LENGTH < 1 && stateName == null) && setState(stateAbb, stateFull);
+        if (parksLoading){setShowLoader(true); setShowMap(false);}
         else {setShowMap(true);}
         window.addEventListener('scroll', () => handleSearchScroll());
         return window.removeEventListener('scroll', () => handleSearchScroll());
-    }, [isLoading]);
+    }, [parksLoading, stateAbb]);
 
     let parksList = [];
-    Object.keys(parksResults).forEach((key, ind) => {
+    PARKS.forEach((key, ind) => {
         let park = parksResults[key];
         parksList.push(
             <SummarySection
@@ -52,38 +55,33 @@ function SearchPage({getStateParks, stateName, parksResults, stateData, isLoadin
 
     return (
         <div className="search-page-container">
-            {loader && <Loader isLoading={isLoading} />}
+            { showLoader && <Loader isLoading={parksLoading}/> }
             <div className="search-results-container">
-                {(isLoading && showMap) && <><h1>GETTING PARKS...</h1><LoaderDots /></>}
-                {!isLoading && 
+                {(parksLoading) && <><h1>GETTING PARKS...</h1><LoaderDots /></>}
+                {!parksLoading && 
                     <>
-                    <h1 className="state-title">{`${stateName} PARKS`}</h1>
+                    <h1 className="state-title">{`${stateFull} PARKS`}</h1>
                     {parksList}
                     </>
                 }
             </div>
-            {showMap &&
                 <div className='map-section-container'>
-                    <div className='map-container'>
-                        {!isLoading && 
-                            <MapContainer 
-                            markers={parksResults} 
-                            pos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
-                            zoom={stateData[stateAbb].zoom}
-                            />
-                        }
-                    </div>  
+                    <MapContainer 
+                    showMap={showMap}
+                    markers={parksResults} 
+                    pos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
+                    zoom={stateData[stateAbb].zoom}
+                    />
                     <Searchbar dropdown={false} stateAbb={stateAbb}/>
                 </div>
-            }
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.parksData.parks.loading,
         stateName: state.appState.state,
+        parksLoading: state.parksData.parks.loading,
         stateData: state.parksData.states.byId,
         parksResults: state.parksData.parks.byId
     }

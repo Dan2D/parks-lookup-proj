@@ -1,6 +1,7 @@
 export const initialState = {
     appState: {
         state: null,
+        stateAbb: null,
         park: null,
         content: null,
         loading: false,
@@ -513,7 +514,7 @@ export const initialState = {
                     name: "Connecticut",
                     lat: 41.597782,
                     lng: -72.755371,
-                    zoom: 9,
+                    zoom: 8,
                     parks: [
                         {
                         "name": "Appalachian National Scenic Trail",

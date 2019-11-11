@@ -1,46 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import { formatCoord } from "../utils/genHelpers";
+import { handleMarkerClick, handleMarkerHover, formatCoord } from "../utils/mapHelpers";
 import L from 'leaflet';
 import {Map, TileLayer, Marker, Tooltip} from 'react-leaflet';
+
 // TODO(FIGURE OUT SOLUTION TO PREVENT WINDOW BEFORE FIXED MAP KICKS IN, MOVES CURSOR AND IS ANNOYING)
-function MapContainer({markers, pos, zoom, }) {
+function MapContainer({showMap, markers, pos, zoom}) {
     const [position, setPosition] = useState(pos);
-    const [atTop, setAtTop] = useState(true);
-
-    function handleMarkerClick(num) {
-        let btn = document.querySelector(`label.btn-expand-label${num}`);
-        // if (num < 2 && !atTop){
-        //     let btnTwo = document.querySelector('label.btn-expand-label2');
-        //     window.scrollTo(0, btnTwo.parentElement.offsetTop);
-        // }
-        // else if (num < 2) {
-            
-        // }
-        // else {
-        //     window.scrollTo(0, btn.parentElement.offsetTop);
-        // }
-        window.scrollTo(0, btn.parentElement.offsetTop);
-        btn.click();
-    }
-
-    function handleMarkerHover(num, event) {
-        let toolTip = document.querySelector(`.tooltip-${num}`);
-        if (event === 'enter'){
-            toolTip.style.display = 'block';
-        }
-        else {
-            toolTip.style.display = 'none';
-        }
-    }
-
     let markerArr=[];
+
+    useEffect(() => {
+        setPosition(pos);
+    }, [pos])
+    
     Object.keys(markers).forEach((key, ind) => {
         let numIcon = L.divIcon({
                 className: "num-icon", 
                 iconSize: null, 
                 iconAnchor: [40, 22],
                 tooltipAnchor: [0, 0],
-                html: `<span class='marker-${ind+1}'>${parseInt(ind+1)}</span>` });
+                html: `<span class='marker-${ind+1}'>${parseInt(ind+1)}</span>` 
+            });
         const PARK_NAME = markers[key].name;
         const COORD = formatCoord(markers[key].latLong);
         if (COORD){
@@ -57,18 +36,20 @@ function MapContainer({markers, pos, zoom, }) {
                 </Marker>
             )
         }
-    })
-
-
+    });
 
         return (
-            <Map center={position} zoom={zoom}>
-                <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                />
-                {markerArr}
-        </Map>
+            <div className='map-container'>
+                {showMap && 
+                    <Map center={position} zoom={zoom}>
+                        <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                        />
+                        {markerArr}
+                    </Map>
+                }
+            </div>
         )
 }
 

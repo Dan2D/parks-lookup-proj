@@ -34,39 +34,3 @@ a {
   }
 }
 
-.loader {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 50%;
-  text-align: center;
-  transform: translateY(-50%);
-  z-index: 5;
-  &.sub {
-    position: relative;
-    transform: none;
-    text-align: left;
-    top: 0;
-  }
-  &.fade {
-    opacity: 0;
-    transition: opacity 700ms ease;
-  }
-  &.inactive {
-    display: none !important;
-  }
-  &--dots {
-    height: auto;
-    top: 5px;
-    right: auto;
-    transform: none;
-    &.fade {
-      transition: opacity 300ms ease;
-    }
-  }
-  &--expand {
-    display: none;
-  }
-}
-
