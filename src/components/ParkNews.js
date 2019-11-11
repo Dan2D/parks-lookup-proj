@@ -47,7 +47,7 @@ function ParkNews({parkCode, newsPark, getNews, news, newsLoaded}) {
             <h2 className="park__section-title park__section-title--news">
                 NEWS
             </h2>
-            <ExpandBtn identifier='--news' />
+            <ExpandBtn inputId='--news' labelId={2}/>
             {newsLoaded && <LoaderDots expand={true} />}
             {!newsLoaded && newsArr}
         </div>

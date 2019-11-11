@@ -80,7 +80,7 @@ function ParkEvents({parkCode, eventPark, events, isLoading}) {
             <h2 className="park__section-title park__section-title--events">
                 EVENTS
             </h2>
-            <ExpandBtn identifier='--events' />
+            <ExpandBtn inputId='--events' labelId={1}/>
             {isLoading && <LoaderDots isLoading={isLoading} expand={true} />}
             {!isLoading && eventsArr}
         </div>

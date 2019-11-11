@@ -103,6 +103,7 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, getS
                     <div className='map-container'>
                         
                         <MapContainer 
+                            showMap={true}
                             markers={mapContent} 
                             pos={formatCoord(parks[parkCode].latLong)} 
                             zoom={8}

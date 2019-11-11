@@ -8,13 +8,13 @@ function ParksSummaryPage({states}) {
         let linkList = [];
             Object.keys(states[key].parks).forEach((parkKey) => {
                 linkList.push(
-                    <Link to={`/state/${key}/parks/${states[key].parks[parkKey].parkCode}`} className='parks-summary__lnk'>
+                    <Link key={states[key].parks[parkKey].parkCode} to={`/state/${key}/parks/${states[key].parks[parkKey].parkCode}`} className='parks-summary__lnk'>
                         {states[key].parks[parkKey].name}
                     </Link>
                 )
             })
             parksList.push(
-            <div className='parks-summary__state-divider'>
+            <div key={key} className='parks-summary__state-divider'>
                 <h3 className='parks-summary__name'>{states[key].name}</h3>
                 {linkList}
             </div>
