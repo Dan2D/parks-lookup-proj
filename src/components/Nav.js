@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Nav() {
     return (
@@ -10,7 +11,7 @@ function Nav() {
                 </h1>
             </div>
             <div className="nav-lnks-container">
-                <a href="#" className="nav-lnk">PARKS</a>
+                <Link to="/parks" className="nav-lnk">PARKS</Link>
                 <a href="#" className="nav-lnk">ABOUT</a>
                 <a href="#" className="nav-lnk">CONTACT</a>
             </div>

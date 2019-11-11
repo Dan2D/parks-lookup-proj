@@ -34,7 +34,7 @@ function ParkCamps({camps, isLoading}) {
                             {CAMP_NAME}
                         </h2>
                     </div>
-                    <ExpandBtn identifier={`--camp --camp${key}`} />
+                    <ExpandBtn inputId={`--camp`} labelId={ind+1}/>
                     <p className='camp__dscrpt'>
                         {CAMP_DSCRPT}
                     </p>

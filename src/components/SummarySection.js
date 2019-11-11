@@ -18,7 +18,7 @@ function SummarySection({num, state, title, dscrpt, url, type, setPark, parkCode
     const TYPE_PARK = type === 'park';
     const parkContent = (
         <>
-            <ExpandBtn identifier={num}/>
+            <ExpandBtn inputId={num} labelId={num}/>
             <div className='park-summary-container'>
                 <p className={`section-dscrpt`}>{dscrpt}</p>
                 <Link to={`/state/${state}/parks/${parkCode}/`} className="btn btn--park-lnk" onClick={() => setPark(parkCode)}>

@@ -12,7 +12,6 @@ const mapDispatchToProps = dispatch => {
   }
 
 function Searchbar({dropdown, stateAbb, states, setState}) {
-    console.log(stateAbb)
     const [select, setSelect] = useState('state');
     const [selectVal, setSelectVal] = useState(stateAbb ? stateAbb : 'AL');
     const [toggleDropdown, setToggleDropdown] = useState(false);

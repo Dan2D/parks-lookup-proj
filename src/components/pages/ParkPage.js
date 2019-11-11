@@ -36,9 +36,10 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, getS
     let parkCode = props.match.params.parkId;
     let state = props.match.params.stateId;
     const [content, setContent] = useState("general");
+    const PARKS_LENGTH = Object.keys(parks).length;
  
     useEffect(() => {
-        Object.keys(parks).length < 1 && getStateParks(state);
+        PARKS_LENGTH < 1 && getStateParks(state);
         props.eventPark !== parkCode && getEvents(parkCode);
         props.newsPark !== parkCode && getNews(parkCode);
         props.campsPark !== parkCode && getCampgrounds(parkCode);
@@ -52,7 +53,10 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, getS
     }, [props.match.params])
 
  
-    if (Object.keys(parks).length < 1){return <Loader isLoading={Object.keys(parks).length < 1}/>}
+    if (PARKS_LENGTH < 1){
+        return <Loader isLoading={PARKS_LENGTH < 1}/>
+    }
+    
     let mapContent = content !== 'camps' ? vCenters : camps;
     const PARK_STATES = parks[parkCode].states;
     const PARK_NAME = parks[parkCode].fullName;

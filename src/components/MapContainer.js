@@ -3,22 +3,9 @@ import { formatCoord } from "../utils/genHelpers";
 import L from 'leaflet';
 import {Map, TileLayer, Marker, Tooltip} from 'react-leaflet';
 // TODO(FIGURE OUT SOLUTION TO PREVENT WINDOW BEFORE FIXED MAP KICKS IN, MOVES CURSOR AND IS ANNOYING)
-// TODO(NORMALIZE ALL BTN EXPAND LABEL CLASSES, DOESN'T CURRENTLY WORK WITH CAMPS OR VISITOR CENTERS)
 function MapContainer({markers, pos, zoom, }) {
     const [position, setPosition] = useState(pos);
     const [atTop, setAtTop] = useState(true);
-    // useEffect(() => {
-    //     function handleScrollWatch() {
-    //         console.log(window.scrollY);
-    //         if (window.scrollY > 120){
-    //             console.log("NOT AT TOP")
-    //             setAtTop(false);
-    //         }
-    //         else {setAtTop(true);}
-    //     }
-    //     window.addEventListener('scroll', () => handleScrollWatch());
-    //     return window.removeEventListener('scroll', () => handleScrollWatch());
-    // }, [])
 
     function handleMarkerClick(num) {
         let btn = document.querySelector(`label.btn-expand-label${num}`);

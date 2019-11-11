@@ -1,6 +1,11 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+p {
+    margin: 0;
+    white-space: pre-line;
+    text-align: left;
+}
 .hero-container {
     position: relative;
     display: flex;
