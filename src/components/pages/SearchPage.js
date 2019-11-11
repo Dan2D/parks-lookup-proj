@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { handleSearchScroll, handleParkHover } from "../../utils/genHelpers";
+import { getStateParks } from "../../actions/parksDataActions";
 
 
 import SummarySection from "../SummarySection";
@@ -9,12 +10,22 @@ import Searchbar from "../searchbar/Searchbar";
 import LoaderDots from "../Loaders/LoaderDots";
 import Loader from "../Loaders/Loader";
 
+const mapDispatchToProps = dispatch => {
+    return {
+        getStateParks: (state) => {
+            return dispatch(getStateParks(state));
+        }
+    }
+}
+
 //CONTAINER COMPONENT
-function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
+function SearchPage({getStateParks, stateName, parksResults, stateData, isLoading, ...props}) {
+    let stateAbb = props.match.params.stateId;
     const [loader, setLoader] = useState(false);
     const [showMap, setShowMap] = useState(false);
 
     useEffect(() => {
+        Object.keys(parksResults).length < 1 && getStateParks(stateAbb);
         if (isLoading){setLoader(true);}
         else {setShowMap(true);}
         window.addEventListener('scroll', () => handleSearchScroll());
@@ -62,7 +73,7 @@ function SearchPage({stateName, stateAbb, parksResults, stateData, isLoading}) {
                             />
                         }
                     </div>  
-                    <Searchbar dropdown={false}/>
+                    <Searchbar dropdown={false} stateAbb={stateAbb}/>
                 </div>
             }
         </div>
@@ -73,10 +84,9 @@ const mapStateToProps = state => {
     return {
         isLoading: state.parksData.parks.loading,
         stateName: state.appState.state,
-        stateAbb: state.appState.stateAbb,
         stateData: state.parksData.states.byId,
         parksResults: state.parksData.parks.byId
     }
 }
 
-export default connect(mapStateToProps)(SearchPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)

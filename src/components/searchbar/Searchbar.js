@@ -11,9 +11,10 @@ const mapDispatchToProps = dispatch => {
     }
   }
 
-function Searchbar({dropdown, states, setState}) {
+function Searchbar({dropdown, stateAbb, states, setState}) {
+    console.log(stateAbb)
     const [select, setSelect] = useState('state');
-    const [selectVal, setSelectVal] = useState('AL');
+    const [selectVal, setSelectVal] = useState(stateAbb ? stateAbb : 'AL');
     const [toggleDropdown, setToggleDropdown] = useState(false);
 
     let statesArr = [];
@@ -26,7 +27,7 @@ function Searchbar({dropdown, states, setState}) {
     })
 
     function handleSearch(e) {
-        if (select === "state"){
+        if (select === "state" && selectVal !== stateAbb){
             let stateVal = document.getElementById("state-select").value;
             const stateFull = (states[stateVal].name).toString();
             setState(stateVal, stateFull);
@@ -48,7 +49,7 @@ function Searchbar({dropdown, states, setState}) {
     return (
         <div className="searchbar-container">
             {select === "state" ? 
-                <select name="state-selection" id="state-select" className="hero-select hero-select--state" onChange={(e) => handleStateSelect(e)}>
+                <select name="state-selection" id="state-select" value={selectVal} className="hero-select hero-select--state" onChange={(e) => handleStateSelect(e)}>
                     {statesArr}
                 </select> :
                 <input type="search" name="hero-searchbar" className="searchbar searchbar--hero"/>

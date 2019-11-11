@@ -39,7 +39,6 @@ export function formatCoord(data){
 };
 
 export function handleParkHover(parkNum, event) {
-    console.log(parkNum, event)
     let marker = document.querySelector(`span.marker-${parkNum}`).parentElement;
     let tooltip = document.querySelector(`div.tooltip-${parkNum}`);
     if (event === 'enter') {   

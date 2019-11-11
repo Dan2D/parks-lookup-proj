@@ -97,12 +97,12 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, getS
                 </div>
                 <div className='map-section-container'>
                     <div className='map-container'>
-                        {Object.keys(mapContent).length > 1 &&   
+                        
                         <MapContainer 
                             markers={mapContent} 
                             pos={formatCoord(parks[parkCode].latLong)} 
                             zoom={8}
-                        /> }
+                        /> 
                     </div>  
                 </div>
             </div>
