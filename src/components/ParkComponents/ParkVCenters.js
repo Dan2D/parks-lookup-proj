@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleParkHover } from "../utils/genHelpers";
+import { handleParkHover } from "../../utils/genHelpers";
 
-import SummarySection from "./SummarySection";
-import LoaderDots from "./Loaders/LoaderDots";
+import SummarySection from "../SummarySection";
+import LoaderDots from "../Loaders/LoaderDots";
 // TODO(ADD ONMOUSEENTER/MOUSELEAVE FOR SUMMARY SECTION AND FUNCTION TO CHANGE MARKER CLASS)
 function ParkVCenters({vc, isLoading}) {
     let vcArr = [];

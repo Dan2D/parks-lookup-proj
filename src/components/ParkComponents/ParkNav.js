@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCampgrounds } from "../actions/parksDataActions";
+import { getCampgrounds } from "../../actions/parksDataActions";
 
 const mapDispatchToProps = dispatch => {
     return {

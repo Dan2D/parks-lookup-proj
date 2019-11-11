@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Parser from 'react-html-parser';
-import { formatDate } from "../utils/genHelpers";
+import { formatDate } from "../../utils/genHelpers";
 
-import ExpandBtn from "./ExpandBtn";
-import LoaderDots from "./Loaders/LoaderDots";
+import ExpandBtn from "../ExpandBtn";
+import LoaderDots from "../Loaders/LoaderDots";
 
 function ParkEvents({parkCode, eventPark, events, isLoading}) {
     

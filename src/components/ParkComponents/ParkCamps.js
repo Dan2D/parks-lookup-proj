@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkIfEmpty, handleParkHover } from "../utils/genHelpers";
+import { checkIfEmpty, handleParkHover } from "../../utils/genHelpers";
 
 import CampCardSection from "./CampCardSection";
-import ExpandBtn from "./ExpandBtn";
-import LoaderDots from "./Loaders/LoaderDots";
+import ExpandBtn from "../ExpandBtn";
+import LoaderDots from "../Loaders/LoaderDots";
 
 function ParkCamps({camps, isLoading}) {
     let campsArr = [];

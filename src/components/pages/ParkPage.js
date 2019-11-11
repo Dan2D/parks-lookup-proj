@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {setState, getEvents, getNews, getCampgrounds, getVCenters, setPark } from "../../actions/parksDataActions";
 import { formatCoord, handleSearchScroll } from "../../utils/genHelpers";
 
-import ParkNav from "../ParkNav";
-import ParkCamps from "../ParkCamps";
-import ParkVC from "../ParkVCenters";
-import ParkAlerts from "../ParkAlerts";
-import ParkEvents from "../ParkEvents";
-import ParkNews from "../ParkNews";
+import ParkNav from "../ParkComponents/ParkNav";
+import ParkCamps from "../ParkComponents/ParkCamps";
+import ParkVC from "../ParkComponents/ParkVCenters";
+import ParkAlerts from "../ParkComponents/ParkAlerts";
+import ParkEvents from "../ParkComponents/ParkEvents";
+import ParkNews from "../ParkComponents/ParkNews";
 import MapContainer from "../MapContainer";
 import Loader from "../Loaders/Loader";
 

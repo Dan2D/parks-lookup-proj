@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Parser from 'react-html-parser';
-import Loader from "./Loaders/LoaderDots";
+import Loader from "../Loaders/LoaderDots";
 
 //TODO(Check on loader to see if is actually loading)
 // TODO(ADD EXPAND TO ALERT BOXES AND START OUT MINIFIED)
