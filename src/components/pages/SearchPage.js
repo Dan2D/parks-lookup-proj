@@ -55,25 +55,26 @@ function SearchPage({setState, parksResults, stateName, stateData, parksLoading,
 
     return (
         <div className="search-page-container">
-            { showLoader && <Loader isLoading={parksLoading}/> }
+            {/* { showLoader && <Loader isLoading={parksLoading}/> } */}
             <div className="search-results-container">
-                {(parksLoading) && <><h1>GETTING PARKS...</h1><LoaderDots /></>}
-                {!parksLoading && 
-                    <>
-                    <h1 className="state-title">{`${stateFull} PARKS`}</h1>
-                    {parksList}
-                    </>
-                }
+                {parksLoading && <><h1>GETTING PARKS...</h1><LoaderDots /></>}
+            {!parksLoading &&
+            <>
+                <h1 className="state-title">{`${stateFull} PARKS`}</h1>
+                {parksList}
+            </>
+            }
             </div>
-                <div className='map-section-container'>
-                    <MapContainer 
-                    showMap={showMap}
-                    markers={parksResults} 
-                    pos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
-                    zoom={stateData[stateAbb].zoom}
-                    />
-                    <Searchbar dropdown={false} stateAbb={stateAbb}/>
-                </div>
+            <div className='map-section-container'>
+                <MapContainer 
+                showMap={showMap}
+                markers={parksResults} 
+                pos={[stateData[stateAbb].lat, stateData[stateAbb].lng]} 
+                zoom={stateData[stateAbb].zoom}
+                />
+                <Searchbar dropdown={false} stateAbb={stateAbb}/>
+            </div>
+            
         </div>
     )
 }

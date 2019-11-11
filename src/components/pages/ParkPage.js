@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getStateParks, getEvents, getNews, getCampgrounds, getVCenters } from "../../actions/parksDataActions";
+import {setState, getEvents, getNews, getCampgrounds, getVCenters, setPark } from "../../actions/parksDataActions";
 import { formatCoord, handleSearchScroll } from "../../utils/genHelpers";
 
 import ParkNav from "../ParkNav";
@@ -14,8 +14,11 @@ import Loader from "../Loaders/Loader";
 
 const mapDispatchToProps = dispatch => {
     return {
-        getStateParks: (state) => {
-            return dispatch(getStateParks(state));
+        setState: (state, stateFull) => {
+            return dispatch(setState(state, stateFull));
+        },
+        setPark: (parkCode) => {
+            return dispatch(setPark(parkCode));
         },
         getEvents: (parkCode) => {
             return dispatch(getEvents(parkCode));
@@ -32,14 +35,17 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, getStateParks, getEvents, getNews, getCampgrounds, getVCenters, ...props}) {
+function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, stateData, setState, setPark, getEvents, getNews, getCampgrounds, getVCenters, ...props}) {
     let parkCode = props.match.params.parkId;
     let state = props.match.params.stateId;
     const [content, setContent] = useState("general");
     const PARKS_LENGTH = Object.keys(parks).length;
  
     useEffect(() => {
-        PARKS_LENGTH < 1 && getStateParks(state);
+        if(PARKS_LENGTH < 1) {
+            setState(state, stateData[state].name);
+            setPark(parkCode);
+        }
         props.eventPark !== parkCode && getEvents(parkCode);
         props.newsPark !== parkCode && getNews(parkCode);
         props.campsPark !== parkCode && getCampgrounds(parkCode);
@@ -119,6 +125,7 @@ const mapStateToProps = state => {
     const PARK_DATA = state.parksData;
     const APP = state.appState;
     return {
+        stateData: PARK_DATA.states.byId,
         isLoading: PARK_DATA.parks.loading,
         parkContent: APP.content,
         parkCode: APP.park,
