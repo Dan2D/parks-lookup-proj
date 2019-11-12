@@ -52,14 +52,14 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, stat
         props.vcPark !== parkCode && getVCenters(parkCode);
         if (props.match.params.content){
             let content = props.match.params.content;
-            content === 'campgrounds' ? setContent('camps') : setContent('vc');
+            content === 'campgrounds' ?  setContent('camps') : setContent('vc');
         }
         window.addEventListener('scroll', () => handleSearchScroll());
         return window.removeEventListener('scroll', () => handleSearchScroll());
     }, [props.match.params])
 
  
-    if (PARKS_LENGTH < 1){
+    if (PARKS_LENGTH < 1){ 
         return <Loader isLoading={PARKS_LENGTH < 1}/>
     }
     
@@ -81,7 +81,7 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, stat
                     <h1 className="park__name">
                         {PARK_NAME}
                     </h1>
-                    <span className="park__states">
+                    <span className="sub-note">
                         {`States: ${PARK_STATES}`}
                     </span>
                     <p className="park__dscrpt">
@@ -92,7 +92,7 @@ function ParkPage({isLoading, parks,  camps, vCenters, parkContent, alerts, stat
                             WEATHER
                         </h2>
                         <p className="park__section-txt">
-                            {PARK_WEATHER_TXT}
+                            {PARK_WEATHER_TXT.length > 1 ? PARK_WEATHER_TXT : 'No weather information available...'}
                         </p>
                     </section>
                     {content === "general" &&

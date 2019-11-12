@@ -22,8 +22,11 @@
       display: none !important;
     }
     &--dots {
+      position: relative;
+      display: inline-block;
       height: auto;
-      top: 5px;
+      top: -32px;
+      left: -24px;
       right: auto;
       transform: none;
       &.fade {

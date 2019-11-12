@@ -15,16 +15,11 @@
             font-size: 18px;
         }
     }
-    &__states {
-        position: relative;
-        font-size: 16px;
-        font-style: italic;
-        top: -10px;
-    }
     &__section-title {
         position: relative;
         display: inline-block;
-        margin: 0;
+        margin: 10px 0 0 0;
+        font-size: 24px;
     }
     &__section-title--alerts::after {
         content: "\ef1b";
@@ -55,16 +50,15 @@
 }
 
 .park__section-title::after {
-    top: -4px;
-    right: -45px;
-    font-size: 32px;
+    top: 0px;
+    right: -32px;
+    font-size: 24px;
 }
 
 
 .alerts-container,
 .events-container,
-.news-container,
-.camp-full-container {
+.news-container {
     position: relative;
     min-height: 70px;
 }
@@ -143,7 +137,7 @@
 
 .camp {
     &-full-container {
-        position: relative;
+        // position: relative;
     }
     &__content {
         position: relative;

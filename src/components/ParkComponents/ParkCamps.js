@@ -58,9 +58,10 @@ function ParkCamps({camps, isLoading}) {
 
     return (
         <div className="camp-full-container">
-            <h2 className="camps__title">
+            <h2 className="park__section-title">
                 CAMPGROUNDS
             </h2>
+            <span className="sub-note"><i>Note: Some campsites coordinates may be missing (Additions coming soon...)</i></span>
             {isLoading && <LoaderDots />}
             {!isLoading && campsArr}
         </div>
